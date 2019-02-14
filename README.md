@@ -1,5 +1,5 @@
 Jennifer Zhang
 Natalie DeLong
-Valerie Lo - hello
+Valerie Lo 
 Joanna Velez
 Angela Wang
