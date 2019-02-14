@@ -1,2 +1,1 @@
-Jennifer Zhang
-Natalie DeLong
+Joanna Velez
