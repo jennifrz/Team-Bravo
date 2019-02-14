@@ -1,1 +1,2 @@
 Valerie Lo
+Joanna Velez
