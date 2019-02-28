@@ -11,8 +11,106 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
-    <title>Homepage</title>
+
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    
+    <title>Profile Page</title>
+
+    <style>
+
+    body {
+      color: #272932;
+    }
+
+    #user_info {
+      width: auto;
+      height: 140px;
+      margin: auto;
+      margin-top: 50px;
+      margin-bottom: 25px;
+      /*border: 1px solid black;*/
+    }
+
+     td {
+      height: 140px;
+      width: 140px;
+      /*vertical-align: middle;*/
+      padding: 15px;
+    }
+
+     td.user_name_listings {
+        width: auto;
+      }
+
+    #prof_pic {
+      border-radius: 50%;
+      height: 140px;
+      width: 140px;
+      object-position: fixed;
+      object-fit: cover;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #name {
+     /* text-align: center;*/
+    }
+
+    #name, #user_listings {
+      font-weight: bold;
+    }
+
+    #user_name {
+      color: #5F6C72;
+    }
+
+    #edit_profile_button {
+      display: block;
+      width: 300px;
+      margin: auto;
+    }
+
+    #listings_grid {
+      width: auto;
+      height: auto;
+      margin: auto;
+      border-collapse: separate;
+    }
+
+      table.spacing {
+        border-spacing: 50px;
+      }
+
+      .listing_image {
+        width: 300px;
+        height: 350px;
+        background-color: gray;
+        object-fit: cover;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      .listing_name {
+        margin-top: 15px;
+        margin-bottom: 0px;
+        font-weight: bold;
+        font-size: 12px;
+        color: #5F6C72;
+      }
+
+      .listing_size {
+        color: #5F6C72;
+      }
+
+     .listing_offers, .listing_size {
+        margin-top: 2.5px;
+        margin-bottom: 0px;
+        font-weight: bold;
+        font-size: 12px;
+      }
+
+    </style>
+
   </head>
+
   <body>
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,20 +148,102 @@
     </nav>
 
     <!-- Your Code Here -->
+      
+      <!-- User information -->
+      <table id="user_info">
+        <tr>
+          <td>
+            <img src="image/profile_pic.jpeg" id="prof_pic" alt="example_user_pic">
+          </td>
+          <td id="user_name_listings"> 
+            <p id="name">Britney Garza</p>
+            <p id="user_name">garza.britney</p>
+            <p id="user_listings">30 listings</p>
+          </td>
+        </tr>
+      </table>
 
+      <!-- Button -->
+      <button id="edit_profile_button" class="btn btn-outline-secondary">Edit Profile</button>
 
+      <!-- Listings Grid-->
+      <table id="listings_grid" class="spacing">
+        
+        <!-- Row 1 -->
+        <tr class="listing_info">
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/tee.jpg" class="listing_image" alt="tee shirt"></a>
+            <p class="listing_name"><span class="ui-icon-caret-1-e">Marble Tee</span></p>
+            <p class="listing_offers"><span class="ui-icon-refresh">5 offers</span></p>
+            <p class="listing_size"><span class="ui-icon-info">Size Small</span></p>
+          </td>
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/pink.jpg" class="listing_image" alt="pink purse"></a>
+            <p class="listing_name">Pink LV Bag</p>
+            <p class="listing_offers">10 offers</p>
+            <p class="listing_size">Size OS</p>
+          </td>
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/shorts.jpeg" class="listing_image" alt="shorts"></a>
+            <p class="listing_name">Distressed Denim Shorts</p>
+            <p class="listing_offers">7 offers</p>
+            <p class="listing_size">Size 4</p>
+          </td>
+        </tr>
 
+        <!-- Row 2 -->
+        <tr class="listing_info">
+          <td>
+            <a class="hoverable" href="ListingPage.html"><img src="image/heels.jpg" class="listing_image" alt="black_heels"></a>
+            <p class="listing_name">Black Heels</p>
+            <p class="listing_offers">5 offers</p>
+            <p class="listing_size">Size 7</p>
+          </td>
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/dress1.jpeg" class="listing_image" alt="dress"></a>
+            <p class="listing_name">Leopard Dress</p>
+            <p class="listing_offers">0 offers</p>
+            <p class="listing_size">Size 2</p>
+          </td>
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/dress2.jpg" class="listing_image" alt="dress"></a>
+            <p class="listing_name">Purple Dress</p>
+            <p class="listing_offers">3 Offers</p>
+            <p class="listing_size">Size Small</p>
+          </td>
+        </tr>
 
+        <!-- Row 3 -->
+        <tr class="listing_info">
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/chanel.jpg" class="listing_image" alt="chanel_purse"></a>
+            <p class="listing_name">Grey Chanel Purse</p>
+            <p class="listing_offers">10 offers</p>
+            <p class="listing_size">Size OS</p>
+          </td>
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/dress3.jpg" class="listing_image" alt="dress"></a>
+            <p class="listing_name">Studded Dress</p>
+            <p class="listing_offers">Listing_offers</p>
+            <p class="listing_size">Size 4</p>
+          </td>
+          <td>
+             <a class="hoverable" href="ListingPage.html"><img src="image/gucci.jpg" class="listing_image" alt="gucci sneaker"></a>
+            <p class="listing_name">Gucci Sneakers</p>
+            <p class="listing_offers">5 offers</p>
+            <p class="listing_size">Size 7.5</p>
+          </td>
+        </tr>
 
-
-
-
-
+      </table>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- jQuery UI -->
+   <!--  <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script> -->
   </body>
 </html>
