@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
-    <title>Homepage</title>
+    <title>Dashboard</title>
   </head>
   <body>
     <!-- Navigation bar -->
@@ -94,16 +94,20 @@
         
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <a href="ListingPage.html">
+              <div class="item-img" id="item1"></div>
               <div class="description">
-                White Knitted Beanie
+                Gray Shoes
                 <br/>
                 <strong>21 offers</strong>
                 <br/>
-                Size: OS
+                Size: S
+                </a>
                 <div class="profile">
+                  <a href="ProfilePage">
                   <img src="image/profile_pic.jpeg" class="profile-pic">
                   garza_brittany
+                  </a>
                 </div>
               </div>
             </div>       
@@ -111,7 +115,7 @@
             
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <div class="item-img" id="item2"></div>
               <div class="description">
                 Faux Leather Gloves
                 <br/>
@@ -128,7 +132,7 @@
             
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <div class="item-img" id="item3"></div>
               <div class="description">
                 Dark Blue Ripped Straight-Leg Jeans
                 <br/>
@@ -145,7 +149,7 @@
             
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <div class="item-img" id="item4"></div>
               <div class="description">
                 Woven Bag
                 <br/>
@@ -162,11 +166,11 @@
             
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <div class="item-img" id="item5"></div>
               <div class="description">
-                White Knitted Beanie
+                Cropped Pink Hoodie
                 <br/>
-                <strong>21 offers</strong>
+                <strong>55 offers</strong>
                 <br/>
                 Size: OS
                 <div class="profile">
@@ -179,11 +183,13 @@
             
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <div class="item-img" id="item6">
+                <!--<img src="image/7.jpg">-->
+              </div>
               <div class="description">
-                Faux Leather Gloves
+                Striped Maxi Skirt
                 <br/>
-                <strong>2 offers</strong>
+                <strong>27 offers</strong>
                 <br/>
                 Size: OS
                 <div class="profile">
@@ -196,13 +202,13 @@
             
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <div class="item-img" id="item7"></div>
               <div class="description">
-                Dark Blue Ripped Straight-Leg Jeans
+                Dangly Earrings with Swarovski Elements
                 <br/>
-                <strong>39 offers</strong>
+                <strong>42 offers</strong>
                 <br/>
-                Size: S, M
+                Size: OS
                 <div class="profile">
                   <img src="image/profile_pic.jpeg" class="profile-pic">
                   natashalipton8
@@ -213,13 +219,13 @@
             
             <!-- start block -->
             <div class="item">
-              <div class="item-img"></div>
+              <div class="item-img" id="item8"></div>
               <div class="description">
-                Woven Bag
+                Blue Fur Lined Boots
                 <br/>
-                <strong>96 offers</strong>
+                <strong>11 offers</strong>
                 <br/>
-                Size: OS
+                Size: S
                 <div class="profile">
                   <img src="image/profile_pic.jpeg" class="profile-pic">
                   coffeeburn_
@@ -244,5 +250,19 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+    <script>
+      $(function(){
+           
+           $('goToListing').click(function(){
+                $('figure img').animate({'width': '200%',}, 1000, linear).delay(1000).animate({'width': '100%',}, 1000, linear)})
+            ; 
+      
+      
+    </script>
+    
+    
+    
   </body>
 </html>
