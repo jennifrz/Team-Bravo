@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="css/messagePage.css">
+    <link rel="stylesheet" type="text/css" href="css/chattingPage.css">
     <title>Homepage</title>
   </head>
   <body>
@@ -33,7 +33,7 @@
 
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link active">MESSAGES</a>
+            <a class="nav-link" href="MessagePage.html">MESSAGES</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="NotificationPage.html">NOTIFICATIONS</a>
@@ -51,43 +51,52 @@
     </nav>
 
     <!-- Your Code Here -->
-    <div id="title"><b>Messages</b>(3)</div>
+    <div id="title"><b>Messages</b></div>
     <div id="message_div">
       <table id="message_table" class="table">
-        <tr onclick="getMessageDetails();">
-          <td class="name">Tommy Trojan</td>
-          <td class="message">You: Not really sure yet.</td>
-          <td class="time">3:50 PM</td>
+        <tr>
+          <td class="name, align-middle">Tommy Trojan</td>
+          <td class="content">Your denim jacket is awesome. Let's swap!</td>
+          <td class="time, align-middle">3:50 PM</td>
         </tr>
-        <tr onclick="getMessageDetails();">
-          <td class="name">Jonathan Ryan</td>
-          <td class="message">Ok, sounds good. Let me know the details ...</td>
-          <td class="time">Yesterday 9:00 AM</td>
+        <tr>
+          <td class="name, align-middle">You</td>
+          <td class="content">Ok, sounds good!</td>
+          <td class="time, align-middle">Yesterday 9:00 AM</td>
         </tr>
-        <tr onclick="getMessageDetails();">
-          <td class="name">Margaret Garrett</td>
-          <td class="message">I'm interested.</td>
-          <td class="time">Friday 1:32 PM</td>
+        <tr>
+          <td class="name, align-middle">Tommy Trojan</td>
+          <td class="content">Wow. Yes. You can submit a swap request and I can take a look tonight!</td>
+          <td class="time, align-middle">Friday 1:32 PM</td>
         </tr>
-        <tr onclick="getMessageDetails();">
-          <td class="name">Danielle Hicks</td>
-          <td class="message">You: Let's swap!</td>
-          <td class="time">Friday 10:17 AM</td>
+        <tr>
+          <td class="name, align-middle">You</td>
+          <td class="content">You: Sure! I have a denim jacket. Are you interested?</td>
+          <td class="time, align-middle">Friday 10:17 AM</td>
         </tr>
-        <tr onclick="getMessageDetails();">
-          <td class="name">Ralph Thomas</td>
-          <td class="message">What exactly are you thinking of?</td>
-          <td class="time">Thursday 8:51 PM</td>
+        <tr>
+          <td class="name, align-middle">Tommy Trojan</td>
+          <td class="content">Thanks. Are you interested in swapping?</td>
+          <td class="time, align-middle">Wednesday 5:32 AM</td>
         </tr>
-        <tr onclick="getMessageDetails();">
-          <td class="name">Micheal Brown</td>
-          <td class="message">I like this item</td>
-          <td class="time">Wednesday 4:04 AM</td>
+        <tr>
+          <td class="name, align-middle">You</td>
+          <td class="content">I like this item.</td>
+          <td class="time, align-middle">Wednesday 4:04 AM</td>
         </tr>
       </table>
     </div>
+    <div id="message_input_div">
+      <textarea id="message_input"></textarea>
+      <br>
+      <button id="sendButton">Send Message</button>
+    </div>
 
-    <script src="js/messagePage.js"></script>
+
+
+
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

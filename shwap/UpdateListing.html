@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/createListing.css">
+    <title>Homepage</title>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand ml-3">
+        <img src="image/logo.png" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+
+        <form class="form-inline ml-3 mr-auto mt-2 mt-lg-0 search_bar">
+          <span class="fa fa-search search_icon"></span>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        </form>
+
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="MessagePage.html">MESSAGES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="NotificationPage.html">NOTIFICATIONS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="FavoritePage.html">FAVORITES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ProfilePage.html">
+              <img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Your Code Here -->
+    <div id="form_div">
+      <div id="form_title">CREATE LISTING</div>
+      <form>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="txt" class="form-control" placeholder="What are you selling?">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control">
+            <option disabled selected>Select Category</option>
+            <option>Tops</option>
+            <option>Jacket & Coat</option>
+            <option>Pants</option>
+            <option>Jeans</option>
+            <option>Shorts</option>
+            <option>Skirts</option>
+            <option>Dresses</option>
+            <option>Accessories</option>
+            <option>Others</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Size</label>
+          <select class="form-control">
+            <option disabled selected>Select Size</option>
+            <option>XXS</option>
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>One Size</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Details</label>
+          <textarea class="form-control" rows="3" placeholder="Describe it!"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Brand</label>
+          <input type="txt" class="form-control" placeholder="Enter the Brand/Designer">
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <select class="form-control">
+            <option disabled selected>Select Color</option>
+            <option>Red</option>
+            <option>Orange</option>
+            <option>Yellow</option>
+            <option>Green</option>
+            <option>Blue</option>
+            <option>Purple</option>
+            <option>Pink</option>
+            <option>Black</option>
+            <option>Gray</option>
+            <option>White</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Original Price</label>
+          <input type="txt" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Current Value Estimated</label>
+          <input type="txt" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Upload Photos</label>
+          <table id="image_table">
+            <td><img id="image1" width="200px" height="200px" onclick="open_file_dialog();"/></td>
+            <td><img id="image2" width="200px" height="200px" onclick="open_file_dialog();"/></td>
+            <td><img id="image3" width="200px" height="200px" onclick="open_file_dialog();"/></td>
+            <td><img id="image4" width="200px" height="200px" onclick="open_file_dialog();"/></td>
+          </table>
+          <input type="file" accept="image/*" class="form-control-file" id="choose_file_1" onchange="preview_image1(event);" style="display:none"></td>
+           <input type="file" accept="image/*" class="form-control-file" id="choose_file_2" onchange="preview_image2(event);" style="display:none"></td>
+            <input type="file" accept="image/*" class="form-control-file" id="choose_file_3" onchange="preview_image3(event);" style="display:none"></td>
+             <input type="file" accept="image/*" class="form-control-file" id="choose_file_4" onchange="preview_image4(event);" style="display:none"></td>
+        </div>
+      </form>
+    </div>
+    <div id="button_div">
+      <button class="buttons" id="submit_button">Submit</button>
+      <button class="buttons">Cancel</button>
+    </div>
+
+    <input type="file" id="imgupload" style="display:none"/> 
+
+    <script type="text/javascript">
+      function preview_image1(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image1');
+        alert(reader.result);
+        output.src = reader.result;
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function preview_image2(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image2');
+        output.src = reader.result;
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function preview_image3(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image3');
+        output.src = reader.result;
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function preview_image4(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image4');
+        output.src = reader.result;
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function open_file_dialog(){
+        document.getElementById("choose_file_1").click();
+      }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
