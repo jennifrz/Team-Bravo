@@ -23,9 +23,9 @@ button:focus{
 }
 
 .buttons{
-  background-color: transparent;
-  color: gray;
-  border: 1px gray solid;
+  background-color: #63C6F1;;
+  color: white;
+  border: none;
   width: 20%;
   height: 40px;
   border-radius: 5px;

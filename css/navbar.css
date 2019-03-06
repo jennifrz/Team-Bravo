@@ -176,11 +176,11 @@ a, a:hover {
 }
 
 #create_listing_btn{
-	color: gray;
-	background-color: transparent;
+	color: white;
+	background-color: #63C6F1;
 	outline: none;
+	border: none;
 	float: right;
-	border: 1px solid gray;
 	border-radius: 5px;
 	margin-right: 20px;
 }
