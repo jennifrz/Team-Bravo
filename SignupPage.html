@@ -17,42 +17,43 @@
         padding: 20px;
         font-weight: bold;
       }
-      .btn-primary {
+      .btn {
         background-color: #63C6F1;
         border-color: #63C6F1;
-        border-radius: 24px;
+        border-radius: 12px;
         width: 178px;
-        margin-right: 35px;
-      }
-      .btn-outline-primary {
-        color: #63C6F1;
-        border-color: #63C6F1;
-        border-width: 2px;
-        border-radius: 24px;
-        width: 178px;
-      }
-      .container {
-        padding-top: 8%;
         margin-left: auto;
         margin-right: auto;
-        font-family: Futura;
+      }
+      .container {
+        text-align: center;
+        padding-top: 3%;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: Futura,Trebuchet MS,Arial,sans-serif;
+        letter-spacing: 0.5px;
       }
       .nav-item {
         font-size: 18px;
       }
+      .form-control {
+        padding: 25px;
+        margin: 25px;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+      }
       h1 {
-        font-size: 52px;
-        font-weight: bold;
+        font-size: 36px;
+        font-family: neue-haas-grotesk-display, sans-serif;
       }
       h3 {
-        color: white;
-        padding: 10%;
-        font-family: Futura;
-        float: right;
+        font-size: 18px;
+        color: #898F91;
+        padding: 2%;
       }
     </style>
 
-    <title>Homepage</title>
+    <title>Sign Up</title>
   </head>
 
   <body>
@@ -71,46 +72,41 @@
 
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link active">HOME</a>
+            <a class="nav-link" href="index.html">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="SignUpPage.html">SIGN UP</a>
+            <a class="nav-link active">SIGN UP</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="LoginPage.html">LOG IN</a>
           </li>
         </ul>
       </div>
+      </div>
     </nav>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-5" style="padding-top: 12%;">
-          <h1>shop & swap</h3>
-          <br/>
-          <br/>
-          <form action="SignUpPage.html" style="float: left;">
-            <button type="submit" class="btn btn-lg btn-primary">sign up</button>
-          </form>
-          <form action="LoginPage.html" style="float: left;">
-            <button type="submit" class="btn btn-lg btn-outline-primary">log in</button>
-          </form>
-        </div>
+    <form action="Homepage.html">
+      <div class="container form-group">
+        <h1>SIGN UP</h1>
+        <hr>
 
-        <div class="col-sm-5">
-          <img src="homepage_people.png"/>
-        </div>
-      </div>
+        <input type="text" class="form-control" placeholder="Email address" name="email">
+
+        <input type="text" class="form-control" placeholder="Username" name="username">
+
+        <input type="password" class="form-control" placeholder="Password" name="psw">
+
+        <input type="password" class="form-control" placeholder="Confirm Password" name="psw-repeat">
+
+        <h3>By creating an account, I accept Shwap's Terms and Privacy Policy.</h3>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
     </div>
+    </form>
 
-    <div>
-      <img src="how_it_works.png"/>
+    <div class="container" style="padding-top: 1%; padding-bottom: 5%;">
+      <h3>Already have an account? <a href="loginpage.html">Log In</a></h3>
     </div>
-
-    <div style="width: 100%; height: 300px; background-color: #272932;">
-      <h3>created by team bravo</h3>
-    </div>
-
 
 
     <!-- Optional JavaScript -->

@@ -60,6 +60,7 @@
       border-radius: 50%;
       height: 150px;
       width: 150px;
+      object-fit: cover;
     }
 
     /* Product Section */
@@ -72,14 +73,14 @@
     }
 
     .listingObject {
-      width: 27%;
+      width: 280px;
       display: inline-block;
       margin: 2%;
     }
 
     .listingObject img {
       width: 100%;
-      height: 274px;
+      height: 280px;
    }
 
     .details {
@@ -103,7 +104,6 @@
       font-weight: bold;
       color: #272932;
     }
-
 
     </style>
 
@@ -137,7 +137,7 @@
             <a class="nav-link" href="FavoritePage.html">FAVORITES</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active">
+            <a class="nav-link active" href="ProfilePage.html">
               <img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
             </a>
           </li>
@@ -157,9 +157,10 @@
 
      <!-- User Info -->
       <div id="user_info_holder">
-        <p id="user">Britney Garza</p>
-        <p id="user_name">garza_britney</p>
-        <p id="user_listings">9 listings</p>
+        <div id="user">Britney Garza</div>
+        <div id="user_name">garza_britney</div>
+        <br>
+        <div id="user_listings">9 listings</div>
       </div>
 
       <div class="clearfloat"></div>
