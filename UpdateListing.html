@@ -147,7 +147,6 @@
        reader.onload = function()
        {
         var output = document.getElementById('image1');
-        alert(reader.result);
         output.src = reader.result;
        }
        reader.readAsDataURL(event.target.files[0]);
