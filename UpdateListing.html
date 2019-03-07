@@ -126,10 +126,10 @@
             <td><img id="image3" width="200px" height="200px" onclick="open_file_dialog();"/></td>
             <td><img id="image4" width="200px" height="200px" onclick="open_file_dialog();"/></td>
           </table>
-          <input type="file" accept="image/*"  class="form-control-file" id="choose_file_1" onchange="preview_image1(event);" style="display:none"></td>
-           <input type="file" accept="image/*" class="form-control-file" id="choose_file_2" onchange="preview_image2(event);" style="display:none"></td>
-            <input type="file" accept="image/*" class="form-control-file" id="choose_file_3" onchange="preview_image3(event);" style="display:none"></td>
-             <input type="file" accept="image/*" class="form-control-file" id="choose_file_4" onchange="preview_image4(event);" style="display:none"></td>
+          <input type="file" accept="image/*"  class="form-control-file" id="choose_file_1" onchange="preview_image1(this);" style="display:none"></td>
+           <input type="file" accept="image/*" class="form-control-file" id="choose_file_2" onchange="preview_image2(this);" style="display:none"></td>
+            <input type="file" accept="image/*" class="form-control-file" id="choose_file_3" onchange="preview_image3(this);" style="display:none"></td>
+             <input type="file" accept="image/*" class="form-control-file" id="choose_file_4" onchange="preview_image4(this);" style="display:none"></td>
         </div>
       </form>
     </div>
@@ -154,6 +154,7 @@
 
       function preview_image2(event)
       {
+       alert("hehre");
        var reader = new FileReader();
        reader.onload = function()
        {
