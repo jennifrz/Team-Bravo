@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="jquery-ui.min.css">
     
-    <title>Profile</title>
+    <title>Profile Page</title>
 
     <style>
 
@@ -62,6 +62,13 @@
       width: 150px;
     }
 
+   #edit_listings_button {
+    display: block;
+    width: 25%;
+    margin-left: 37.5%;
+    margin-top: 50px;
+   }
+
     /* Product Section */
 
     .section2 {
@@ -103,7 +110,6 @@
       font-weight: bold;
       color: #272932;
     }
-
 
     </style>
 
@@ -150,22 +156,16 @@
     <!-- Section 1 -->
     <div id="section1">
 
-      <!-- Profile Picture -->
-      <div id="user_profile_pic_holder">
-       <img id="user_profile_pic" src="image/profile_pic.jpeg">
-      </div>
-
-     <!-- User Info -->
-      <div id="user_info_holder">
-        <p id="user">Britney Garza</p>
-        <p id="user_name">garza_britney</p>
-        <p id="user_listings">9 listings</p>
-      </div>
-
-      <div class="clearfloat"></div>
+        <div class="details">
+          <a href="OffersMade.html"> <button type="button" class="btn btn-outline-secondary" class="offerMade">Offers Made</button></a>
+          <a href="OffersReceived.html"><button type="button" class="btn btn-outline-secondary" class="offerReceived">Offers Received</button></a>
+        </div>
 
     </div>
     <!-- End of section 1 -->
+
+    <!-- Button -->
+    <a href="EditListings.html"><button type="button" id="edit_listings_button" class="btn btn-outline-secondary">Edit Profile</button></a>
 
     <!-- Section 2 -->
     <div class="section2">
@@ -175,8 +175,9 @@
         <img src="image/4.jpg" class="listing_img" alt="jeans">
         <div class="details">
           <p>Jeans</p>
-          <p class="offer_bold">5 Offers</p>
           <p>Size: Small</p>
+          <p class="offer_bold">5 Offers</p>
+              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
       </a>
@@ -186,8 +187,9 @@
         <img src="image/dress2.jpg" class="listing_img" alt="dress">
         <div class="details">
           <p>Dress</p>
-          <p class="offer_bold">5 Offers</p>
           <p>Size: Small</p>
+          <p class="offer_bold">5 Offers</p>
+              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
       </a>
@@ -197,49 +199,20 @@
        <img src="image/chanel.jpg" class="listing_img" alt="purse">
         <div class="details">
           <p>Chanel Purse</p>
-          <p class="offer_bold">15 Offers</p>
           <p>Size: OS</p>
+          <p class="offer_bold">15 Offers</p>
+              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
       </a>
 
-      <a class="listing_link" href="ListingPage.html">
-      <div class="listingObject">
-        <img src="image/pink.jpg" class="listing_img" alt="purse">
-        <div class="details">
-          <p>LV Purse</p>
-          <p class="offer_bold">9 Offers</p>
-          <p>Size: OS</p>
-        </div>
-      </div>
-      </a>
-    
-      <a class="listing_link" href="ListingPage.html">
-      <div class="listingObject">
-        <img src="image/gucci.jpg" class="listing_img" alt="sneakers">
-        <div class="details">
-          <p>Gucci Sneakers</p>
-          <p class="offer_bold">10 Offers</p>
-          <p>Size: 7</p>
-        </div>
-      </div>
-      </a>
-    
-      <a class="listing_link" href="ListingPage.html">
-      <div class="listingObject">
-        <img src="image/tee.jpg" class="listing_img" alt="tee">
-        <div class="details">
-          <p>Marble Tee</p>
-          <p class="offer_bold">5 Offers</p>
-          <p>Size: Small</p>
-        </div>
+      
       </div>
       </a>
 
     </div>
     <!-- End of Section 2 -->
     
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

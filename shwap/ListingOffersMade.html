@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="jquery-ui.min.css">
     
-    <title>Profile</title>
+    <title>Profile Page</title>
 
     <style>
 
@@ -26,7 +26,6 @@
       width: 70%;
       margin-left: 15%;
       text-align: center;
-      margin-top: 50px;
     }
 
     #user_profile_pic_holder {
@@ -62,6 +61,13 @@
       width: 150px;
     }
 
+   #back_button {
+    display: block;
+    width: 25%;
+    margin-left: 37.5%;
+    margin-top: 50px;
+   }
+
     /* Product Section */
 
     .section2 {
@@ -80,30 +86,25 @@
     .listingObject img {
       width: 100%;
       height: 274px;
+      margin-bottom: 15px;
    }
 
-    .details {
-      margin-top: 15px;
-   }
-
-    .details p {
-      margin-bottom: 2px;
-      text-align: left;
-   }
-
-    a.listing_link {
-      color: black;
+    button.delete {
+      display: inline-block;
+      margin-right: 15px;
     }
 
-    div.details > p {
-      color: #5F6C72;
-   }
-
-    .offer_bold {
-      font-weight: bold;
-      color: #272932;
+    button.update {
+      display: inline-block;
     }
-
+    
+    .horiz {
+      color: gray;
+      font-size: 15px;
+      margin-top: 50px;
+      margin-left: 100px;
+      margin-bottom: 10px;
+    }
 
     </style>
 
@@ -146,20 +147,16 @@
     </nav>
 
     <!-- Your Code Here -->
-      
+          <p class="horiz"><a href="ViewOffers.html">Back to Offers</a> </p>
+
     <!-- Section 1 -->
     <div id="section1">
-
-      <!-- Profile Picture -->
-      <div id="user_profile_pic_holder">
-       <img id="user_profile_pic" src="image/profile_pic.jpeg">
+      <div class="listingObject">
+        <p>Jeans</p>
+        <p>Size: Small</p>
+        <img src="image/4.jpg" class="listing_img" alt="jeans">
+      </a>
       </div>
-
-     <!-- User Info -->
-      <div id="user_info_holder">
-        <p id="user">Britney Garza</p>
-        <p id="user_name">garza_britney</p>
-        <p id="user_listings">9 listings</p>
       </div>
 
       <div class="clearfloat"></div>
@@ -168,59 +165,55 @@
     <!-- End of section 1 -->
 
     <!-- Section 2 -->
-    <div class="section2">
+    <div class="section2"> 
+    <strong>You</strong> offered:
+    <br/>
 
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
-        <img src="image/4.jpg" class="listing_img" alt="jeans">
-        <div class="details">
-          <p>Jeans</p>
-          <p class="offer_bold">5 Offers</p>
-          <p>Size: Small</p>
-        </div>
-      </div>
-      </a>
-    
-      <a class="listing_link" href="ListingPage.html">
-      <div class="listingObject">
         <img src="image/dress2.jpg" class="listing_img" alt="dress">
+      </a>
         <div class="details">
-          <p>Dress</p>
-          <p class="offer_bold">5 Offers</p>
-          <p>Size: Small</p>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
-      </a>
+     
     
      <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
        <img src="image/chanel.jpg" class="listing_img" alt="purse">
+      </a>
         <div class="details">
-          <p>Chanel Purse</p>
-          <p class="offer_bold">15 Offers</p>
-          <p>Size: OS</p>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
-      </a>
+    
+    <br/>    <br/>
+
+    
+    <strong>You</strong> offered:
+    <br/>
 
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/pink.jpg" class="listing_img" alt="purse">
+      </a>
         <div class="details">
-          <p>LV Purse</p>
-          <p class="offer_bold">9 Offers</p>
-          <p>Size: OS</p>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
-      </a>
+     
     
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/gucci.jpg" class="listing_img" alt="sneakers">
+      </a>
         <div class="details">
-          <p>Gucci Sneakers</p>
-          <p class="offer_bold">10 Offers</p>
-          <p>Size: 7</p>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
       </a>
@@ -228,18 +221,16 @@
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/tee.jpg" class="listing_img" alt="tee">
+      </a>
         <div class="details">
-          <p>Marble Tee</p>
-          <p class="offer_bold">5 Offers</p>
-          <p>Size: Small</p>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
-      </a>
 
     </div>
     <!-- End of Section 2 -->
     
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
