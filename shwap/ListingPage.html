@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137157993-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137157993-1');
+    </script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -123,22 +133,82 @@
       height: 27px;
 
     }
-    
     a {
-      color: white;
+      color: black;
     }
     a:hover {
-      color: white;
-      text-decoration: none;
-    }
-    .horiz {
-      color: rgb(100,100,100);
-    }
-    .horiz:hover {
-      color: rgb(50,50,50);
+      color: black;
       text-decoration: none;
     }
     </style>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      var username = sessionStorage.getItem("username");
+      var listingId = sessionStorage.getItem("listingId");
+
+      var profileURLRef = firebase.database().ref('Users/' + username + '/profileURL');
+      profileURLRef.on('value', function(snapshot) {
+        document.getElementById('profile_pic').src = snapshot.val();
+      });
+
+      var creator = "";
+      var listingRef = database.ref('Listings/' + listingId);
+      listingRef.on('value', function(snapshot) {
+        let listingInfo = snapshot.val();
+        let brand = listingInfo.brand;
+        document.getElementById("brand").innerHTML = brand;
+        let catogory = listingInfo.catogory;
+        let color = listingInfo.color;
+        document.getElementById("color").style.backgroundColor = color;
+        let orginalPrice = listingInfo.orginalPrice;
+        let currValue = listingInfo.currValue;
+        creator = listingInfo.creator;
+        document.getElementById("creator").innerHTML = creator;
+        let photos = listingInfo.photos;
+        for(var key in photos){
+          let imageURL = photos[key];
+          document.getElementById(key).src = imageURL;
+          if(key == "image1"){
+            document.getElementById("imageMain").src = imageURL;
+          }
+        }
+        let size = listingInfo.size;
+        document.getElementById("size").innerHTML = size;
+        let title = listingInfo.title;
+        document.getElementById("title").innerHTML = title;
+        document.getElementById("link").innerHTML = "All items / " + title;
+        let offerCount = listingInfo.offerCount;
+        document.getElementById("offer").innerHTML = offerCount + " Offers";
+        let details = listingInfo.details;
+        document.getElementById("details").innerHTML = details;
+      });
+
+      var userRef = database.ref('Users');
+      userRef.on('value', function(snapshot) {
+        let users = snapshot.val();
+        let creatorURL = users[creator].profileURL;
+        document.getElementById("creator_profile").src = creatorURL;
+      });
+
+      function changeMain(num){
+        let selectURL = document.getElementById("image" + num).src;
+        document.getElementById("imageMain").src = selectURL;
+      }
+    </script>
 
   </head>
   <body>
@@ -166,11 +236,11 @@
             <a class="nav-link" href="NotificationPage.html">NOTIFICATIONS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ViewOffers.html">OFFERS</a>
+            <a class="nav-link" href="FavoritePage.html">FAVORITES</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ProfilePage.html">
-              <img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
+              <img src="" class="profile_pic" id="profile_pic" width="30" height="30" alt="">
             </a>
           </li>
         </ul>
@@ -179,61 +249,63 @@
 
     <!-- Your Code Here -->
 
-    <p><a class="horiz" href="Dashboard.html">All items</a> / <a class="horiz" href="searchresults">Search Results</a> / <strong>Dark Blue Ripped Straight-Leg Jeans</strong></p>
+    <p id="link"></p>
 
 <div class='column'>
 
   <div class='thumbnailcontainer'>
-    <img src="image/7.jpg" alt="Jeans" class='thumbnail' id='image1'><br>
+    <img src="" alt="" class='thumbnail' id='image1' onclick="changeMain(1)"><br>
   </div>
   <div class='thumbnailcontainer'>
-    <img src="image/4.jpg" alt="Jeans2" class='thumbnail' id='image2'><br>
-</div>
-<div class='thumbnailcontainer'>
-    <img src="image/12.jpg" alt="Jeans3" class='thumbnail' id='image3'><br>
-</div>
+    <img src="" alt="" class='thumbnail' id='image2' onclick="changeMain(2)"><br>
+  </div>
+  <div class='thumbnailcontainer'>
+    <img src="" alt="" class='thumbnail' id='image3' onclick="changeMain(3)"><br>
+  </div>
+  <div class='thumbnailcontainer'>
+    <img src="" alt="" class='thumbnail' id='image4' onclick="changeMain(4)"><br>
+  </div>
 </div>
 
 <div class='column2'>
-    <img src="image/7.jpg" alt="Jeans main" class='mainimage'>
+    <img src="" alt="" class='mainimage' id="imageMain">
 </div>
 
 <div class='column3'>
-<h3><b>Dark Blue Ripped Straight-Leg Jeans</b></h3>
+<h3><b id="title"></b></h3>
 
-<h4>Urban Outfitters</h4>
-
-<br>
-<h5>Size <button type="button" class='select'>4</button><br></h5>
-<br>
-
-<h5>Color<button type="button" class='select2'><button type="button" class='select3'></h5><br>
-
-
-<button type="button" class='swapbutton' onclick="window.location.href='OfferPage.html'">SWAP</button>
-<br>
-<br>
-
-<h5><b>39 Offers</b></h5><br>
-<h5><u>Favorite</u></h5>
+<h4 id="brand"></h4>
 
 <br>
+<h5>Size <button type="button" class='select' id="size">4</button><br></h5>
+<br>
 
+<h5>Color<button type="button" class='select2' id="color"></button></h5><br>
+
+
+<a href="OfferPage.html"><button type="button" class='swapbutton'>SWAP</button></a>
+<br>
+<br>
+
+<h5><b id="offer">39 Offers</b></h5><br>
+<!-- <h5><u>Favorite</u></h5> -->
 <hr>
 <br>
 
 <h5><b>Details</b></h5>
 
-<h5> Near brand-new condition. On the longer side but looks good rolled up. Goes well with almost anything. Wear it with a dark mesh top on a night out, or with a floral top for Sunday brunch! </h5>
+<h5 id="details"></h5>
 <br>
 
 <hr>
 <br>
 <h5><b>About Your Seller</b></h5>
 <br>
-<img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
-Brittany Garza
-<button type="button" class='messagebutton' onclick="window.location.href='ChattingPage.html'">Message</button><br>
+<a href="SellerProfilePage.html"><img src="" id="creator_profile" class="profile_pic" width="30" height="30" alt="">
+<span id="creator"></span></a>
+
+<a href="ChattingPage.html"><button type="button" class='messagebutton'>Message</button><br></a>
+
 <br>
 <br>
 <br>
@@ -249,7 +321,7 @@ Brittany Garza
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<script>
+<!-- <script>
 
 var imagearray = [];
 
@@ -277,7 +349,7 @@ function changemain(source, descr) {
 
 
 
-</script>
+</script> -->
 
 
 
