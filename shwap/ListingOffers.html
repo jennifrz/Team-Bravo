@@ -26,7 +26,6 @@
       width: 70%;
       margin-left: 15%;
       text-align: center;
-      margin-top: 50px;
     }
 
     #user_profile_pic_holder {
@@ -98,6 +97,14 @@
     button.update {
       display: inline-block;
     }
+    
+    .horiz {
+      color: gray;
+      font-size: 15px;
+      margin-top: 50px;
+      margin-left: 100px;
+      margin-bottom: 10px;
+    }
 
     </style>
 
@@ -140,20 +147,16 @@
     </nav>
 
     <!-- Your Code Here -->
-      
+          <p class="horiz"><a href="ViewOffers.html">Back to Offers</a> </p>
+
     <!-- Section 1 -->
     <div id="section1">
-
-      <!-- Profile Picture -->
-      <div id="user_profile_pic_holder">
-       <img id="user_profile_pic" src="image/profile_pic.jpeg">
+      <div class="listingObject">
+        <p>Jeans</p>
+        <p>Size: Small</p>
+        <img src="image/4.jpg" class="listing_img" alt="jeans">
+      </a>
       </div>
-
-     <!-- User Info -->
-      <div id="user_info_holder">
-        <p id="user">Britney Garza</p>
-        <p id="user_name">garza_britney</p>
-        <p id="user_listings">9 listings</p>
       </div>
 
       <div class="clearfloat"></div>
@@ -161,30 +164,18 @@
     </div>
     <!-- End of section 1 -->
 
-   <!-- Button -->
-    <a href="ProfilePage.html"><button type="button" id="back_button" class="btn btn-outline-secondary">Back to Profile</button></a>
-
     <!-- Section 2 -->
-    <div class="section2">
+    <div class="section2"> 
+        <strong>user_name1</strong> offered:
+    <br/>
 
-      <a class="listing_link" href="ListingPage.html">
-      <div class="listingObject">
-        <img src="image/4.jpg" class="listing_img" alt="jeans">
-      </a>
-        <div class="details">
-          <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-          <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
-        </div>
-      </div>
-  
-    
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/dress2.jpg" class="listing_img" alt="dress">
       </a>
         <div class="details">
-          <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-          <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
      
@@ -194,19 +185,24 @@
        <img src="image/chanel.jpg" class="listing_img" alt="purse">
       </a>
         <div class="details">
-            <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-            <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
     
+    <br/>    <br/>
+
+    
+    <strong>user_name2</strong> offered:
+    <br/>
 
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/pink.jpg" class="listing_img" alt="purse">
       </a>
         <div class="details">
-         <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-         <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
      
@@ -216,8 +212,8 @@
         <img src="image/gucci.jpg" class="listing_img" alt="sneakers">
       </a>
         <div class="details">
-          <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-          <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
       </a>
@@ -227,8 +223,8 @@
         <img src="image/tee.jpg" class="listing_img" alt="tee">
       </a>
         <div class="details">
-         <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-         <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
         </div>
       </div>
 
