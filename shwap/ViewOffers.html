@@ -62,7 +62,7 @@
       width: 150px;
     }
 
-   #back_button {
+   #edit_listings_button {
     display: block;
     width: 25%;
     margin-left: 37.5%;
@@ -87,16 +87,28 @@
     .listingObject img {
       width: 100%;
       height: 274px;
-      margin-bottom: 15px;
    }
 
-    button.delete {
-      display: inline-block;
-      margin-right: 15px;
+    .details {
+      margin-top: 15px;
+   }
+
+    .details p {
+      margin-bottom: 2px;
+      text-align: left;
+   }
+
+    a.listing_link {
+      color: black;
     }
 
-    button.update {
-      display: inline-block;
+    div.details > p {
+      color: #5F6C72;
+   }
+
+    .offer_bold {
+      font-weight: bold;
+      color: #272932;
     }
 
     </style>
@@ -144,25 +156,16 @@
     <!-- Section 1 -->
     <div id="section1">
 
-      <!-- Profile Picture -->
-      <div id="user_profile_pic_holder">
-       <img id="user_profile_pic" src="image/profile_pic.jpeg">
-      </div>
-
-     <!-- User Info -->
-      <div id="user_info_holder">
-        <p id="user">Britney Garza</p>
-        <p id="user_name">garza_britney</p>
-        <p id="user_listings">9 listings</p>
-      </div>
-
-      <div class="clearfloat"></div>
+        <div class="details">
+          <a href="OffersMade.html"> <button type="button" class="btn btn-outline-secondary" class="offerMade">Offers Made</button></a>
+          <a href="OffersReceived.html"><button type="button" class="btn btn-outline-secondary" class="offerReceived">Offers Received</button></a>
+        </div>
 
     </div>
     <!-- End of section 1 -->
 
-   <!-- Button -->
-    <a href="ProfilePage.html"><button type="button" id="back_button" class="btn btn-outline-secondary">Back to Profile</button></a>
+    <!-- Button -->
+    <a href="EditListings.html"><button type="button" id="edit_listings_button" class="btn btn-outline-secondary">Edit Profile</button></a>
 
     <!-- Section 2 -->
     <div class="section2">
@@ -170,54 +173,59 @@
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/4.jpg" class="listing_img" alt="jeans">
-      </a>
         <div class="details">
-          <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-          <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <p>Jeans</p>
+          <p>Size: Small</p>
+          <p class="offer_bold">5 Offers Received</p>
+              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
-  
+      </a>
     
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/dress2.jpg" class="listing_img" alt="dress">
-      </a>
         <div class="details">
-          <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-          <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <p>Dress</p>
+          <p>Size: Small</p>
+          <p class="offer_bold">5 Offers Received</p>
+              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
-     
+      </a>
     
      <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
        <img src="image/chanel.jpg" class="listing_img" alt="purse">
-      </a>
         <div class="details">
-            <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-            <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <p>Chanel Purse</p>
+          <p>Size: OS</p>
+          <p class="offer_bold">15 Offers Received</p>
+              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
-    
+      </a>
 
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/pink.jpg" class="listing_img" alt="purse">
-      </a>
         <div class="details">
-         <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-         <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <p>LV Purse</p>
+          <p>Size: OS</p>
+          <p class="offer_bold">9 Offers Made</p>
+              <a href="ListingOffersMade.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
-     
+      </a>
     
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/gucci.jpg" class="listing_img" alt="sneakers">
-      </a>
         <div class="details">
-          <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-          <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <p>Gucci Sneakers</p>
+          <p>Size: 7</p>
+          <p class="offer_bold">10 Offers Made</p>
+              <a href="ListingOffersMade.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
       </a>
@@ -225,12 +233,14 @@
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/tee.jpg" class="listing_img" alt="tee">
-      </a>
         <div class="details">
-         <a href="DeleteListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Delete</button></a>
-         <button type="button" class="btn btn-outline-secondary" class="update">Update</button>
+          <p>Marble Tee</p>
+          <p>Size: Small</p>
+          <p class="offer_bold">5 Offers Made</p>
+              <a href="ListingOffersMade.html"><button type="button" class="btn btn-outline-secondary">View Offers</button></a>
         </div>
       </div>
+      </a>
 
     </div>
     <!-- End of Section 2 -->
