@@ -26,3 +26,150 @@
   pointer-events: none;
   color: #aaa;
 }
+
+
+
+/* start dasboard CSS */
+
+#container {
+	width: 100%;
+	/*border: 2px solid black;*/
+}
+
+#content {
+	/*border: 2px solid black;*/
+
+}
+
+#filters {
+	width: 15%;
+	/*border: 2px solid green;*/
+	float: left;
+	padding: 2%;
+	margin: 3%;
+	margin-right: 0%;
+}
+
+#filters:hover {
+	cursor: pointer;
+}
+
+#filter-title {
+	border-bottom: 2px solid black;
+	padding-bottom: 4%;
+}
+
+.filter-option {
+	border-bottom: 2px solid black;
+	padding: 2%;
+	padding-top: 10%;
+	padding-bottom: 10%;
+}
+
+#results {
+	width: 78%;
+	/*border: 2px solid red;*/
+	float: right;
+	padding: 2%;
+	margin: 3%;
+	margin-left: 0%;
+}
+
+.item {
+	padding-right: 2%;
+	/*border: 2px green solid;*/
+	float: left;
+	width: 25%;
+	height: 60vh;
+}
+
+.item:hover {
+	cursor: pointer;
+}
+
+.item-img {
+	width: 100%;
+	height: 35vh;
+	border: 2px black solid;
+	background-size: cover;
+	background-position: center;
+}
+
+#item1 {
+	background-image: url('../image/item1.jpg');
+}
+
+#item2 {
+	background-image: url('../image/item2.jpg');
+}
+
+#item3 {
+	background-image: url('../image/item3.jpg');
+}
+
+#item4 {
+	background-image: url('../image/item4.jpg');
+}
+
+#item5 {
+	background-image: url('../image/item5.jpg');
+}
+
+#item6 {
+	background-image: url('../image/item6.jpg');
+}
+
+#item7 {
+	background-image: url('../image/item7.jpg');
+}
+
+#item8 {
+	background-image: url('../image/item8.jpg');
+}
+
+/*.description {*/
+	font-size: .9em;
+	padding-top: 2%;
+}
+
+.profile {
+	padding-top: 2%;
+}
+
+.profile-pic {
+	border-radius: 25px;
+	width: 6vh;
+	height: 6vh;
+	object-fit: cover;
+}
+
+a, a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+#notificationContent {
+	/*border: black solid 2px;*/
+	margin: 5% 20% 20%;
+}
+
+#notificationsTitle {
+	padding-bottom: 5%;
+}
+
+.type {
+	/*border: green solid 2px;*/
+	margin-bottom: 5%;
+}
+
+
+.notification {
+	/*border: red solid 2px;*/
+	padding: 2%;
+	border-bottom: 2px solid gray;
+}
+
+.timeStamp {
+	font-size: .8em;
+	color: gray;
+}
