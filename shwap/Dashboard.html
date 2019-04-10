@@ -65,7 +65,7 @@
               }
 
               let newlisting = "<div class='item'><div onclick='getListingDetail(\"" + key +"\")' class='item-img' style='background-image: url(\"" + listingImage;
-              newlisting += "\")'></div><div class='description'><br/><div onclick='getListingDetail(\"" + key +"\")'>" + listingTitle;
+              newlisting += "\")'></div><div class='description'><br/><div class='title' onclick='getListingDetail(\"" + key +"\")'>" + listingTitle;
               newlisting += "</div><strong>" + listingOffers + "</strong><br/>Size: " + listingSize;
               newlisting += "<div class='profile'><img src='' class='profile-pic "+ creator +"'><span class='username'>" + creator + "</span></a></div></div></div>";
               alllisting += newlisting;
