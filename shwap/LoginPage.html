@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137157993-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137157993-1');
+    </script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,53 +21,162 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
-    <title>Homepage</title>
+
+    <style>
+      .navbar {
+        padding: 20px;
+        font-weight: bold;
+      }
+      .btn {
+        background-color: #63C6F1;
+        border-color: #63C6F1;
+        border-radius: 12px;
+        width: 178px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .container {
+        text-align: center;
+        padding-top: 3%;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: Futura,Trebuchet MS,Arial,sans-serif;
+        letter-spacing: 0.5px;
+      }
+      .nav-item {
+        font-size: 18px;
+      }
+      .form-control {
+        padding: 25px;
+        margin: 25px;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+      }
+      h1 {
+        font-size: 36px;
+        font-family: neue-haas-grotesk-display, sans-serif;
+      }
+      h3 {
+        font-size: 18px;
+        color: #898F91;
+        padding: 2%;
+      }
+    </style>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      function login(){
+        // Get form input
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('psw').value;
+
+        if(username == ""){
+          document.getElementById('username').classList.add("is-invalid");
+          document.getElementById("username_error").innerHTML = "Username cannot be empty";
+        }else{
+          document.getElementById('username').classList.remove("is-invalid");
+          document.getElementById("username_error").innerHTML = "";
+        }
+
+        if(password == ""){
+          document.getElementById('psw').classList.add("is-invalid");
+          document.getElementById("psw_error").innerHTML = "Password cannot be empty";
+        }else{
+          document.getElementById('psw').classList.remove("is-invalid");
+          document.getElementById("psw_error").innerHTML = "";
+        }
+
+        if(username != "" && password != ""){
+          // Get user list in database
+          database.ref('/Users/').once('value').then(function(snapshot) {
+      			var userList = snapshot.val();
+
+            // Check if username exists
+            if(userList[username]){
+              //Check if password matches
+              document.getElementById('username').classList.remove("is-invalid");
+              document.getElementById("username_error").innerHTML = "";
+              if(userList[username].password == password){
+                document.getElementById('psw').classList.remove("is-invalid");
+                document.getElementById("psw_error").innerHTML = "";
+                sessionStorage.setItem("username", username);
+                window.location.href = "Homepage.html";
+              }else{
+                document.getElementById('psw').classList.add("is-invalid");
+                document.getElementById("psw_error").innerHTML = "Password is incorrect";
+              }
+            }else{
+              document.getElementById('username').classList.add("is-invalid");
+              document.getElementById("username_error").innerHTML = "Username does not exist";
+            }
+      		});
+        }
+      }
+    </script>
+
+    <title>Log In</title>
   </head>
+
   <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand ml-3" href="Homepage.html">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand ml-3">
         <img src="image/logo.png" width="40" height="40" alt="">
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse">
 
-        <form class="form-inline ml-3 mr-auto mt-2 mt-lg-0 search_bar">
-          <span class="fa fa-search search_icon"></span>
-          <input class="form-control mr-sm-2" type="search" placeholder="Search">
-        </form>
+        <div class="ml-3 mr-auto mt-2 mt-lg-0"></div>
 
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="MessagePage.html">MESSAGES</a>
+            <a class="nav-link" href="index.html">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="NotificationPage.html">NOTIFICATIONS</a>
+            <a class="nav-link" href="SignupPage.html">SIGN UP</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ViewOffers.html">OFFERS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="ProfilePage.html">
-              <img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
-            </a>
+            <a class="nav-link active">LOG IN</a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <!-- Your Code Here -->
+    <form action="Homepage.html">
+      <div class="container form-group">
+        <h1>LOG IN</h1>
+        <hr>
+        <input type="text" class="form-control" placeholder="Username" name="username" id="username">
+        <div class="invalid-feedback" id="username_error"></div>
 
+        <input type="password" class="form-control" placeholder="Password" name="psw" id="psw">
+        <div class="invalid-feedback" id="psw_error"></div>
 
+        <!-- <input type="password" class="form-control" placeholder="Confirm Password" name="psw-repeat"> -->
 
-
-
-
-
-
+        <h3>Forgot password?</h3>
+      </div>
+    </form>
+    <button class="btn btn-primary btn-lg btn-block" onclick="login()">Log In</button>
+    <div class="container" style="padding-top: 1%; padding-bottom: 5%;">
+      <h3>Don't have an account? <a href="SignupPage.html">Sign Up</a></h3>
+    </div>
 
 
     <!-- Optional JavaScript -->
