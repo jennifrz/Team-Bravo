@@ -46,7 +46,8 @@
         var listingRef = database.ref('Listings');
         listingRef.on('value', function(snapshot) {
           let listings = snapshot.val();
-          var alllisting = "<strong>All Items</strong><span id='result-number'>" + Object.keys(listings).length + " Results</span><br/><br/>";
+          let resultCount = 0;
+          var alllisting = "";
           for(let key in listings){
             let listingInfo = listings[key];
             var listingTitle = listingInfo.title;
@@ -64,6 +65,7 @@
                 creatorList.push(creator);
               }
 
+              resultCount ++;
               let newlisting = "<div class='item'><div onclick='getListingDetail(\"" + key +"\")' class='item-img' style='background-image: url(\"" + listingImage;
               newlisting += "\")'></div><div class='description'><br/><div class='title' onclick='getListingDetail(\"" + key +"\")'>" + listingTitle;
               newlisting += "</div><strong>" + listingOffers + "</strong><br/>Size: " + listingSize;
@@ -71,6 +73,13 @@
               alllisting += newlisting;
             }
           }
+
+          if(resultCount == 0){
+            resultCount = "0 Result";
+          }else{
+            resultCount = resultCount + " Results";
+          }
+          var alllisting = "<strong>All Items</strong><span id='result-number'>" + resultCount + "</span><br/><br/>" + alllisting;
           document.getElementById("results").innerHTML = alllisting;
         });
 
