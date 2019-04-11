@@ -78,52 +78,58 @@
 
       var database = firebase.database();
 
-      function login(){
+      function login(inputName){
         // Get form input
         var username = document.getElementById('username').value;
         var password = document.getElementById('psw').value;
-
-        if(username == ""){
-          document.getElementById('username').classList.add("is-invalid");
-          document.getElementById("username_error").innerHTML = "Username cannot be empty";
-        }else{
-          document.getElementById('username').classList.remove("is-invalid");
-          document.getElementById("username_error").innerHTML = "";
+        if(inputName == "username" || inputName == "submit"){
+          if(username == ""){
+            document.getElementById('username').classList.add("is-invalid");
+            document.getElementById("username_error").innerHTML = "Username cannot be empty";
+          }else{
+            document.getElementById('username').classList.remove("is-invalid");
+            document.getElementById("username_error").innerHTML = "";
+          }
         }
 
-        if(password == ""){
-          document.getElementById('psw').classList.add("is-invalid");
-          document.getElementById("psw_error").innerHTML = "Password cannot be empty";
-        }else{
-          document.getElementById('psw').classList.remove("is-invalid");
-          document.getElementById("psw_error").innerHTML = "";
+        if(inputName == "password" || inputName == "submit"){
+          if(password == ""){
+            document.getElementById('psw').classList.add("is-invalid");
+            document.getElementById("psw_error").innerHTML = "Password cannot be empty";
+          }else{
+            document.getElementById('psw').classList.remove("is-invalid");
+            document.getElementById("psw_error").innerHTML = "";
+          }
         }
 
-        if(username != "" && password != ""){
-          // Get user list in database
-          database.ref('/Users/').once('value').then(function(snapshot) {
-      			var userList = snapshot.val();
+        if(inputName == "submit"){
+          if(username != "" && password != ""){
+            // Get user list in database
+            database.ref('/Users/').once('value').then(function(snapshot) {
+        			var userList = snapshot.val();
 
-            // Check if username exists
-            if(userList[username]){
-              //Check if password matches
-              document.getElementById('username').classList.remove("is-invalid");
-              document.getElementById("username_error").innerHTML = "";
-              if(userList[username].password == password){
-                document.getElementById('psw').classList.remove("is-invalid");
-                document.getElementById("psw_error").innerHTML = "";
-                sessionStorage.setItem("username", username);
-                window.location.href = "Dashboard.html";
+              // Check if username exists
+              if(userList[username]){
+                //Check if password matches
+                document.getElementById('username').classList.remove("is-invalid");
+                document.getElementById("username_error").innerHTML = "";
+                if(userList[username].password == password){
+                  document.getElementById('psw').classList.remove("is-invalid");
+                  document.getElementById("psw_error").innerHTML = "";
+                  sessionStorage.setItem("username", username);
+                  window.location.href = "Dashboard.html";
+                }else{
+                  document.getElementById('psw').classList.add("is-invalid");
+                  document.getElementById("psw_error").innerHTML = "Password is incorrect";
+                }
               }else{
-                document.getElementById('psw').classList.add("is-invalid");
-                document.getElementById("psw_error").innerHTML = "Password is incorrect";
+                document.getElementById('username').classList.add("is-invalid");
+                document.getElementById("username_error").innerHTML = "Username does not exist";
               }
-            }else{
-              document.getElementById('username').classList.add("is-invalid");
-              document.getElementById("username_error").innerHTML = "Username does not exist";
-            }
-      		});
+        		});
+          }
         }
+
       }
     </script>
 
@@ -162,10 +168,10 @@
       <div class="container form-group">
         <h1>LOG IN</h1>
         <hr>
-        <input type="text" class="form-control" placeholder="Username" name="username" id="username">
+        <input type="text" class="form-control" placeholder="Username" name="username" id="username" onfocusout="login('username')" oninput="login('username')">
         <div class="invalid-feedback" id="username_error"></div>
 
-        <input type="password" class="form-control" placeholder="Password" name="psw" id="psw">
+        <input type="password" class="form-control" placeholder="Password" name="psw" id="psw" onfocusout="login('password')" oninput="login('password')">
         <div class="invalid-feedback" id="psw_error"></div>
 
         <!-- <input type="password" class="form-control" placeholder="Confirm Password" name="psw-repeat"> -->
@@ -173,7 +179,7 @@
         <h3>Forgot password?</h3>
       </div>
     </form>
-    <button class="btn btn-primary btn-lg btn-block" onclick="login()">Log In</button>
+    <button class="btn btn-primary btn-lg btn-block" onclick="login('submit')">Log In</button>
     <div class="container" style="padding-top: 1%; padding-bottom: 5%;">
       <h3>Don't have an account? <a href="SignupPage.html">Sign Up</a></h3>
     </div>
