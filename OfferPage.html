@@ -73,6 +73,7 @@ width: 200px;
 height: 50px;
 border-radius: 13px;
 display: block;
+margin-right: 366px;
 }
 .messagebutton {
   color: black;
@@ -94,6 +95,12 @@ p {
   font-size: 15px;
   margin-top: 50px;
   margin-left: 100px;
+  margin-bottom: 40px;
+}
+h5 {
+  color: gray;
+  font-size: 25px;
+  margin-top: 50px;
   margin-bottom: 40px;
 }
 .profile_pic {
@@ -130,7 +137,23 @@ a:hover {
   color: black;
   text-decoration: none;
 }
-
+#dropdown {
+  color: black;
+  background-color: white;
+  border-color: #63C6F1;
+  text-align: center;
+  font-size: 12px;
+  padding: 0;
+  width: 300px;
+  height: 40px;
+  border-radius: 6px;
+  border-width: 2px;
+}
+#wrapper {
+  margin-left:auto;
+    margin-right:auto;
+    width:1250px;
+}
     </style>
   </head>
   <body>
@@ -173,35 +196,52 @@ a:hover {
 
 <p>All items / <a href='listingpage.html' class='link'>Dark Blue Ripped Straight-Leg Jeans </a>/ <b>Offer</b></p>
 
+<div id='wrapper'>
+
 <div class='column'>
 <img src="image/7.jpg" alt="Jeans" class='mainimage'>
 </div>
 
 <div class='column'>
-  <img src="image/upload.png" alt="upload" class='mainimage'>
+  <h5>Listing you'd like to offer:</h5>
+  <select id='dropdown'>
+    <option value="1">1</option>
+    <option value="1">1</option>
+    <option value="1">1</option>
+    <option value="1">1</option>
+    <option value="1">1</option>
+    <option value="1">1</option>
+    <option value="1">1</option>
+  </select>
+  <br><br>  <br><br>
+  <br><br>
+
+  <a href="ListingPage.html"><button type="button" class='swapbutton'>SWAP</button></a>
+
+  <!-- <img src="image/upload.png" alt="upload" class='mainimage'> -->
 </div>
 
 <a href="SellerProfilePage.html"><div class='column2'>
 <img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
 Brittany Garza</a>
 <a href='ChattingPage.html' class='link2'><button type="button" class='messagebutton'>Message</button></a>
-
 </div>
 
-<div class='column3'>
+<!-- <div class='column3'>
 Value of this item?<br><br>
 Original price?<br><br>
 Times you've worn this item?
 
 </div>
 
+
 <div class='column4' id='inputting'>
   <input class="inputquestions " type="text" placeholder="ex. $10"><br><br>
   <input class="inputquestions " type="text" placeholder="ex. $10"><br><br>
   <input class="inputquestions " type="text" placeholder="ex. 5">
-</div>
+</div> -->
 
-<a href="ListingPage.html"><button type="button" class='swapbutton'>SWAP</button></a>
+<!-- <a href="ListingPage.html"><button type="button" class='swapbutton'>SWAP</button></a> -->
 
 
 <br><br>
@@ -209,7 +249,7 @@ Times you've worn this item?
 <br>
 
 
-
+</div>
 
 
 
