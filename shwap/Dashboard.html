@@ -12,13 +12,103 @@
 
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <title>Dashboard</title>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+      var username = sessionStorage.getItem("username");
+
+      var profileURLRef = firebase.database().ref('Users/' + username + '/profileURL');
+      profileURLRef.on('value', function(snapshot) {
+          document.getElementById('profile_pic').src = snapshot.val();
+      });
+
+      displayListing("");
+
+      function searchListing(){
+        let searchText = document.getElementById("search").value;
+        displayListing(searchText);
+      }
+
+      function displayListing(keyword){
+        var creatorList = [];
+        var listingRef = database.ref('Listings');
+        listingRef.on('value', function(snapshot) {
+          let listings = snapshot.val();
+          let resultCount = 0;
+          var alllisting = "";
+          for(let key in listings){
+            let listingInfo = listings[key];
+            var listingTitle = listingInfo.title;
+            if(listingTitle.toLowerCase().indexOf(keyword.toLowerCase()) != -1 || keyword == ""){
+              let listingImage = listingInfo.photos.image1;
+              let listingOffers = listingInfo.offerCount;
+              if(listingOffers == '0'){
+                listingOffers = "0 Offer";
+              }else{
+                listingOffers = listingOffers + " Offers";
+              }
+              let listingSize = listingInfo.size;
+              let creator = listingInfo.creator;
+              if(creatorList.indexOf(creator) == -1){
+                creatorList.push(creator);
+              }
+
+              resultCount ++;
+              let newlisting = "<div class='item'><div onclick='getListingDetail(\"" + key +"\")' class='item-img' style='background-image: url(\"" + listingImage;
+              newlisting += "\")'></div><div class='description'><br/><div class='title' onclick='getListingDetail(\"" + key +"\")'>" + listingTitle;
+              newlisting += "</div><strong>" + listingOffers + "</strong><br/>Size: " + listingSize;
+              newlisting += "<div class='profile'><img src='' class='profile-pic "+ creator +"'><span class='username'>" + creator + "</span></a></div></div></div>";
+              alllisting += newlisting;
+            }
+          }
+
+          if(resultCount == 0){
+            resultCount = "0 Result";
+          }else{
+            resultCount = resultCount + " Results";
+          }
+          var alllisting = "<strong>All Items</strong><span id='result-number'>" + resultCount + "</span><br/><br/>" + alllisting;
+          document.getElementById("results").innerHTML = alllisting;
+        });
+
+        var userRef = database.ref('Users');
+        userRef.on('value', function(snapshot) {
+          let users = snapshot.val();
+
+          for(let i=0; i<creatorList.length; i++){
+            let creator = creatorList[i];
+            let elems = document.getElementsByClassName(creator);
+            for(let j=0; j<elems.length; j++){
+              elems[j].src = users[creator].profileURL;
+            }
+          }
+        });
+      }
+
+      function getListingDetail(listingId){
+        sessionStorage.setItem("listingId", listingId);
+        window.location.href = "ListingPage.html";
+      }
+    </script>
   </head>
   <body>
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand ml-3" href="Homepage.html">
+      <div class="navbar-brand ml-3">
         <img src="image/logo.png" width="40" height="40" alt="">
-      </a>
+      </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +117,7 @@
 
         <form class="form-inline ml-3 mr-auto mt-2 mt-lg-0 search_bar">
           <span class="fa fa-search search_icon"></span>
-          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <input class="form-control mr-sm-2" type="search" id="search" placeholder="Search listings" onkeyup="searchListing()" onkeypress="searchListing()">
         </form>
 
         <ul class="navbar-nav my-2 my-lg-0">
@@ -42,58 +132,58 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ProfilePage.html">
-              <img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
+              <img src="" id="profile_pic" class="profile_pic" width="30" height="30" alt="">
             </a>
           </li>
         </ul>
       </div>
     </nav>
-  
+
 <!-- start container -->
-   
+
    <div id="container">
-    
+
     <!-- start content -->
 
     <div id="content">
-        
+
         <!-- start sidebar -->
-        
+
         <div id="filters">
-          
+
             <div id="filter-title">
               <strong>FILTER</strong>
             </div>
-            
+
             <div class="filter-option">
-              Size      <!-- arrow here --><img src="" class="down-arrow"> 
+              Size      <!-- arrow here --><img src="" class="down-arrow">
             </div>
-            
+
             <div class="filter-option">
               Color      <!-- arrow here --><img src="" class="down-arrow">
             </div>
-            
+
             <div class="filter-option">
               Price      <!-- arrow here --><img src="" class="down-arrow">
             </div>
-            
+
             <div class="filter-option">
               Brand      <!-- arrow here --><img src="" class="down-arrow">
             </div>
-          
+
         </div>
         <!-- end sidebar -->
 
         <!-- start results -->
           <div id="results">
-            <strong>All Items</strong> <span id="result-number">4589 Results</span>
-            
+            <!-- <strong>All Items</strong> <span id="result-number">4589 Results</span>
+
             <br/>
-            <br/>
-                
-        
+            <br/> -->
+
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <a href="ListingPage.html">
               <div class="item-img" id="item1"></div>
               <div class="description">
@@ -111,11 +201,11 @@
                   </a>
                 </div>
               </div>
-            </div>       
+            </div> -->
             <!-- end block -->
-            
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-img" id="item2"></div>
               <div class="description">
                 <br>
@@ -130,11 +220,11 @@
                   </a>
                 </div>
               </div>
-            </div>       
+            </div> -->
             <!-- end block -->
-            
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-img" id="item3"></div>
               <div class="description">
                 <br>
@@ -150,11 +240,11 @@
                   </a>
                 </div>
               </div>
-            </div>       
+            </div> -->
             <!-- end block -->
-            
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-img" id="item4"></div>
               <div class="description">
                 <br>
@@ -170,11 +260,11 @@
                   </a>
                 </div>
               </div>
-            </div>       
-            <!-- end block -->   
-            
+            </div> -->
+            <!-- end block -->
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-img" id="item5"></div>
               <div class="description">
                 <br>
@@ -190,13 +280,13 @@
                   </a>
                 </div>
               </div>
-            </div>       
+            </div> -->
             <!-- end block -->
-            
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-img" id="item6">
-                <!--<img src="image/7.jpg">-->
+                <img src="image/7.jpg">
               </div>
               <div class="description">
                 <br>
@@ -212,11 +302,11 @@
                   </a>
                 </div>
               </div>
-            </div>       
+            </div> -->
             <!-- end block -->
-            
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-img" id="item7"></div>
               <div class="description">
                 <br>
@@ -232,11 +322,11 @@
                   </a>
                 </div>
               </div>
-            </div>       
+            </div> -->
             <!-- end block -->
-            
+
             <!-- start block -->
-            <div class="item">
+            <!-- <div class="item">
               <div class="item-img" id="item8"></div>
               <div class="description">
                 <br>
@@ -252,38 +342,38 @@
                   </a>
                 </div>
               </div>
-            </div>       
-            <!-- end block --> 
-          
+            </div> -->
+            <!-- end block -->
+
           </div>
-          <!-- end results -->   
+          <!-- end results -->
     </div>
     <!-- end content -->
-    
+
    </div>
 <!-- end container -->
-   
-    
-    
+
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-    
-    <script>
+
+
+    <!-- <script>
       $(function(){
-           
+
            $('goToListing').click(function(){
                 $('figure img').animate({'width': '200%',}, 1000, linear).delay(1000).animate({'width': '100%',}, 1000, linear)})
-            ; 
-      
-      
-    </script>
-    
-    
-    
+            ;
+
+
+    </script> -->
+
+
+
   </body>
 </html>
