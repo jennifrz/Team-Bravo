@@ -52,19 +52,23 @@
       text-align: left;
     }
 
-      #user, #user_listings {
+      #user {
         font-weight: bold;
       }
 
       #user_name {
-        color: #C0C0C0;
+        color: #5f6c72;
+        margin-top:-15px;
       }
 
-/*     #user_profile_pic {
-      border-radius: 50%;
-      height: 150px;
-      width: 150px;
-    } */
+
+     #edit_listings_button {
+      display: block;
+      width: 25%;
+      margin-left: 37.5%;
+      margin-top: 50px;
+      margin-bottom: 25px;
+     }
 
    #edit_listings_button {
     display: block;
@@ -73,6 +77,7 @@
     margin-top: 50px;
     margin-bottom: 25px;
    }
+
 
     /* Product Section */
 
@@ -101,6 +106,7 @@
     .details p {
       margin-bottom: 2px;
       text-align: left;
+      font-size:14px;
    }
 
     a.listing_link {
@@ -114,6 +120,35 @@
     .offer_bold {
       font-weight: bold;
       color: #272932;
+    }
+
+    .offer-button {
+      float:left;
+      cursor: pointer;
+      color: gray;
+      text-decoration:underline;
+      font-size:14px;
+    }
+
+    .offer-button:hover {
+      color: #63C6F1;
+    }
+
+    .profile-tabs {
+      background-color:white;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      font-size: 17px;
+      color:gray;
+    }
+
+
+    #my-listings{
+      color:black;
+      font-weight:bold;
+      border-bottom:0.5px solid black;
     }
 
     </style>
@@ -163,7 +198,6 @@
 
       <!-- Profile Picture -->
       <div id="user_profile_pic_holder">
-<!--        <img id="user_profile_pic" src="image/profile_pic.jpeg"> -->
       </div>
 
      <!-- User Info -->
@@ -177,10 +211,13 @@
       
       <!-- Button -->
     <a href="EditListings.html"><button type="button" id="edit_listings_button" class="btn btn-outline-secondary">Edit Listings</button></a>
+
+    <br><br>
     
     <!-- profile tabs -->
-          <a href=""><button type="button" class="btn btn-outline-secondary" class="update">My Listings</button></a>
-          <a href=""><button type="button" class="btn btn-outline-secondary" class="update">Offers Made</button></a>
+          <a href=""><button type="button" class="profile-tabs" class="update" id="my-listings">My Listings</button></a>
+          <a href=""><button type="button" class="profile-tabs" class="update">Offers Made</button></a>
+
 
     </div>
     <!-- End of section 1 -->
@@ -194,13 +231,15 @@
     <!-- Section 2 -->
     <div class="section2">
 
+    <!-- my listings -->
+
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/4.jpg" class="listing_img" alt="jeans">
         <div class="details">
           <p>Jeans</p>
           <p>Size: Small</p>
-              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View 5 Offers</button></a>
+              <a href="ListingOffers.html" class="offer-button">View 5 Offers</a>
         </div>
       </div>
       </a>
@@ -211,7 +250,7 @@
         <div class="details">
           <p>Dress</p>
           <p>Size: Small</p>
-              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View 8 Offers</button></a>
+              <a href="ListingOffers.html" class="offer-button">View 8 Offers</a>
         </div>
       </div>
       </a>
@@ -222,10 +261,12 @@
         <div class="details">
           <p>Chanel Purse</p>
           <p>Size: OS</p>
-              <a href="ListingOffers.html"><button type="button" class="btn btn-outline-secondary">View 15 Offers</button></a>
+              <a href="ListingOffers.html" class="offer-button">View 15 Offers</a>
         </div>
       </div>
       </a>
+
+      <!-- offers made -->
 
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
@@ -233,7 +274,7 @@
         <div class="details">
           <p>LV Purse</p>
           <p>Size: OS</p>
-              <a href="ListingPage.html"><button type="button" class="btn btn-outline-secondary">View Your Offer</button></a>
+              <a href="ListingPage.html" class="offer-button">View Your Offer</a>
         </div>
       </div>
       </a>
@@ -244,7 +285,7 @@
         <div class="details">
           <p>Gucci Sneakers</p>
           <p>Size: 7</p>
-              <a href="ListingPage.html"><button type="button" class="btn btn-outline-secondary">View Your Offer</button></a>
+              <a href="ListingPage.html" class="offer-button">View Your Offer</a>
         </div>
       </div>
       </a>
@@ -255,7 +296,7 @@
         <div class="details">
           <p>Marble Tee</p>
           <p>Size: Small</p>
-              <a href="ListingPage.html"><button type="button" class="btn btn-outline-secondary">View Your Offer</button></a>
+              <a href="ListingPage.html" class="offer-button">View Your Offer</a>
         </div>
       </div>
       </a>

@@ -19,7 +19,8 @@
     <style>
 
     body {
-      color: #272932;
+      color: black
+      font-size:14px;
     }
 
     div#section1 {
@@ -31,11 +32,15 @@
 
     #user_profile_pic_holder {
       display: inline-block;
-      height: auto;
+      height: 150px;
       width: 150px;
       margin-left: auto;
       text-align: center;
       vertical-align: middle;
+      background-image: url("image/profile_pic.jpeg");
+      border-radius:50%;
+      background-position:center;
+      background-size: 300px auto;
     }
 
     #user_info_holder {
@@ -48,12 +53,13 @@
       text-align: left;
     }
 
-      #user, #user_listings {
+      #user {
         font-weight: bold;
       }
 
       #user_name {
-        color: #C0C0C0;
+        color: #5f6c72;
+        margin-top:-15px;
       }
 
     #user_profile_pic {
@@ -96,12 +102,14 @@
     }
 
     div.details > p {
-      color: #5F6C72;
+      color: black;
+      font-size:14px;
    }
 
     .offer_bold {
       font-weight: bold;
-      color: #272932;
+      color: black;
+      font-size:14px;
     }
 
 
@@ -152,14 +160,14 @@
 
       <!-- Profile Picture -->
       <div id="user_profile_pic_holder">
-       <img id="user_profile_pic" src="image/profile_pic.jpeg">
+       <!-- <img id="user_profile_pic" src="image/profile_pic.jpeg"> -->
       </div>
 
      <!-- User Info -->
       <div id="user_info_holder">
         <p id="user">Britney Garza</p>
         <p id="user_name">garza_britney</p>
-        <p id="user_listings">9 listings</p>
+        <p id="user_listings">9 Listings</p>
       </div>
 
       <div class="clearfloat"></div>
