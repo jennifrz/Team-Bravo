@@ -73,8 +73,8 @@
       .section2 {
         width: 80%;
         margin-left: 10%;
-        text-align: center;
         margin-top: 50px;
+        float:left;
       }
 
       .listingObject {
@@ -115,7 +115,7 @@
 
       .line {
         border: 0.5px solid gray;
-        width:70%;
+        width:80%;
       }
 
       .information {
@@ -156,6 +156,28 @@
         height:30px;
       }
 
+      .btn-outline-secondary {
+        border-color: #63C6F1;
+        color: #63C6F1;
+        margin-left:10px;
+      }
+
+      .btn-outline-secondary:hover {
+        border-color: #63C6F1;
+        color: white;
+        background-color: #63C6F1;
+      }
+
+      /*.line-two {
+        float:left;
+        margin-top:20px;
+      }*/
+
+      #offers {
+        text-align:center;
+        font-size:24px;
+      }
+
     </style>
 
   </head>
@@ -163,7 +185,7 @@
   <body>
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand ml-3" href="Homepage.html">
+      <a class="navbar-brand ml-3" href="Dashboard.html">
         <img src="image/logo.png" width="40" height="40" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -197,7 +219,7 @@
     </nav>
 
     <!-- Your Code Here -->
-           <p class="horiz"><a href="SellerProfilePage.html"><span id="profile">Britney's Profile </span></a> / <a href="ListingPage.html"><span id="jeans">Jeans</span></a> </p>
+           <p class="horiz"><a href="ProfilePage.html"><span id="profile">My Profile </span></a> / <a href="ListingPage.html"><span id="jeans">Offers for "Jeans"</span></a> </p>
 
     <!-- Section 1 -->
     <div id="section1">
@@ -212,6 +234,7 @@
               <span class="username">garza_britney</span>
               </a>
             </div>
+          </div>
         </div>
       </a>
       </div>
@@ -220,14 +243,15 @@
       <div class="clearfloat"></div>
 
     </div>
+    <br><br>
     <!-- End of section 1 -->
 
     <hr class="line">
 
     <!-- Section 2 -->
-    <div class="section2"> 
-    <strong>You</strong> offered:
     <br>
+    <div class="section2"> 
+    <p id="offers"><strong>OFFERS</strong></p>
     <br>
 
       <a class="listing_link" href="ListingPage.html">
@@ -235,7 +259,19 @@
         <img src="image/dress2.jpg" class="listing_img" alt="dress">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
+          <div class="information">
+          <div class="description">
+            <p id="item">Purple Dress</p>
+            <p>Size: Small</p>       
+            <div class="profile">
+              <img src="image/profile_pic.jpeg" class="profile-picture" alt=""> 
+              <span class="username">garza_britney</span>
+              </a>
+            </div>
+          </div>
+          </div>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-secondary">Accept</button>
         </div>
       </div>
      
@@ -245,45 +281,90 @@
        <img src="image/chanel.jpg" class="listing_img" alt="purse">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
+          <div class="information">
+          <div class="description">
+            <p id="item">Chanel Purse</p>
+            <p>Size: OS</p>       
+            <div class="profile">
+              <img src="image/profile_pic.jpeg" class="profile-picture" alt=""> 
+              <span class="username">garza_britney</span>
+              </a>
+            </div>
+          </div>
+          </div>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-secondary">Accept</button>
         </div>
       </div>
     
-    <br/>    <br/>
-
-  
-    <br/>
 
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/pink.jpg" class="listing_img" alt="purse">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
+          <div class="information">
+          <div class="description">
+            <p id="item">Pink LV Purse</p>
+            <p>Size: OS</p>       
+            <div class="profile">
+              <img src="image/profile_pic.jpeg" class="profile-picture" alt=""> 
+              <span class="username">garza_britney</span>
+              </a>
+            </div>
+          </div>
+          </div>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-secondary">Accept</button>
         </div>
       </div>
      
     
       <a class="listing_link" href="ListingPage.html">
-      <div class="listingObject">
+      <div class="listingObject line-two">
         <img src="image/gucci.jpg" class="listing_img" alt="sneakers">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
+          <div class="information">
+          <div class="description">
+            <p id="item">Gucci Shoes</p>
+            <p>Size: 7.5</p>       
+            <div class="profile">
+              <img src="image/profile_pic.jpeg" class="profile-picture" alt=""> 
+              <span class="username">garza_britney</span>
+              </a>
+            </div>
+          </div>
+          </div>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-secondary">Accept</button>
         </div>
       </div>
       </a>
     
       <a class="listing_link" href="ListingPage.html">
-      <div class="listingObject">
+      <div class="listingObject line-two">
         <img src="image/tee.jpg" class="listing_img" alt="tee">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
+          <div class="information">
+          <div class="description">
+            <p id="item">Gray Acid Wash T-Shirt</p>
+            <p>Size: Small</p>       
+            <div class="profile">
+              <img src="image/profile_pic.jpeg" class="profile-picture" alt=""> 
+              <span class="username">garza_britney</span>
+              </a>
+            </div>
+          </div>
+          </div>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-secondary">Accept</button>
         </div>
       </div>
 
     </div>
+
     <!-- End of Section 2 -->
     
     <!-- Optional JavaScript -->
