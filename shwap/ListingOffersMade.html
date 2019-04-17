@@ -18,93 +18,143 @@
 
     <style>
 
-    body {
-      color: #272932;
-    }
-
-    div#section1 {
-      width: 70%;
-      margin-left: 15%;
-      text-align: center;
-    }
-
-    #user_profile_pic_holder {
-      display: inline-block;
-      height: auto;
-      width: 150px;
-      margin-left: auto;
-      text-align: center;
-      vertical-align: middle;
-    }
-
-    #user_info_holder {
-      display: inline-block;
-      height: auto;
-      width: 150px;
-      margin-left: 40px;
-      margin-right: auto;
-      vertical-align: middle;
-      text-align: left;
-    }
-
-      #user, #user_listings {
-        font-weight: bold;
+      body {
+        color: #272932;
       }
 
-      #user_name {
-        color: #C0C0C0;
+      div#section1 {
+        width: 70%;
+        margin-left: 15%;
+        text-align: center;
       }
 
-    #user_profile_pic {
-      border-radius: 50%;
-      height: 150px;
-      width: 150px;
-    }
+      #user_profile_pic_holder {
+        display: inline-block;
+        height: auto;
+        width: 150px;
+        margin-left: auto;
+        text-align: center;
+        vertical-align: middle;
+      }
 
-   #back_button {
-    display: block;
-    width: 25%;
-    margin-left: 37.5%;
-    margin-top: 50px;
-   }
+      #user_info_holder {
+        display: inline-block;
+        height: auto;
+        width: 150px;
+        margin-left: 40px;
+        margin-right: auto;
+        vertical-align: middle;
+        text-align: left;
+      }
 
-    /* Product Section */
+        #user, #user_listings {
+          font-weight: bold;
+        }
 
-    .section2 {
-      width: 80%;
-      margin-left: 10%;
-      text-align: center;
+        #user_name {
+          color: #C0C0C0;
+        }
+
+      #user_profile_pic {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+      }
+
+     #back_button {
+      display: block;
+      width: 25%;
+      margin-left: 37.5%;
       margin-top: 50px;
-    }
+     }
 
-    .listingObject {
-      width: 27%;
-      display: inline-block;
-      margin: 2%;
-    }
+      /* Product Section */
 
-    .listingObject img {
-      width: 100%;
-      height: 274px;
-      margin-bottom: 15px;
-   }
+      .section2 {
+        width: 80%;
+        margin-left: 10%;
+        text-align: center;
+        margin-top: 50px;
+      }
 
-    button.delete {
-      display: inline-block;
-      margin-right: 15px;
-    }
+      .listingObject {
+        width: 27%;
+        display: inline-block;
+        margin: 2%;
+      }
 
-    button.update {
-      display: inline-block;
-    }
-    
-    .horiz {
-      color: gray;
-      font-size: 15px;
-      margin-top: 50px;
-      margin-left: 100px;
-      margin-bottom: 10px;
-    }
+      .listingObject img {
+        width: 100%;
+        height: 274px;
+        margin-bottom: 15px;
+     }
+
+      button.delete {
+        display: inline-block;
+        margin-right: 15px;
+      }
+
+      button.update {
+        display: inline-block;
+      }
+      
+      .horiz {
+        font-size: 15px;
+        margin-top: 50px;
+        margin-left: 300px;
+        margin-bottom: 10px;
+      }
+
+      #profile {
+        color: gray;
+      }
+
+      #jeans {
+        font-weight:bold;
+      }
+
+      .line {
+        border: 0.5px solid gray;
+        width:70%;
+      }
+
+      .information {
+        text-align:left;
+      }
+
+      #item {
+        margin-bottom:5px;
+        margin-top:10px;
+      }
+
+      .description {
+        font-size: 14px;
+        margin-top: -10px;
+      }
+
+      .profile {
+        margin-top: -15px;
+      }
+
+      .username {
+        font-size:12px;
+        color: #919191;
+        margin-left:3px;
+        margin-top:-20px;
+      }
+
+      .profile-picture {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        margin-top:5px;
+        border-radius:50%;
+      }
+
+      .profile img {
+        width:30px;
+        height:30px;
+      }
 
     </style>
 
@@ -138,7 +188,7 @@
             <a class="nav-link" href="ViewOffers.html">OFFERS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active">
+            <a class="nav-link active" href="ProfilePage.html">
               <img src="image/profile_pic.jpeg" class="profile_pic" width="30" height="30" alt="">
             </a>
           </li>
@@ -147,14 +197,22 @@
     </nav>
 
     <!-- Your Code Here -->
-          <p class="horiz"><a href="ViewOffers.html">Back to Offers</a> </p>
+           <p class="horiz"><a href="SellerProfilePage.html"><span id="profile">Britney's Profile </span></a> / <a href="ListingPage.html"><span id="jeans">Jeans</span></a> </p>
 
     <!-- Section 1 -->
     <div id="section1">
       <div class="listingObject">
-        <p>Jeans</p>
-        <p>Size: Small</p>
         <img src="image/4.jpg" class="listing_img" alt="jeans">
+        <div class="information">
+          <div class="description">
+            <p id="item">Jeans</p>
+            <p>Size: Small</p>       
+            <div class="profile">
+              <img src="image/profile_pic.jpeg" class="profile-picture" alt=""> 
+              <span class="username">garza_britney</span>
+              </a>
+            </div>
+        </div>
       </a>
       </div>
       </div>
@@ -164,18 +222,20 @@
     </div>
     <!-- End of section 1 -->
 
+    <hr class="line">
+
     <!-- Section 2 -->
     <div class="section2"> 
     <strong>You</strong> offered:
-    <br/>
+    <br>
+    <br>
 
       <a class="listing_link" href="ListingPage.html">
       <div class="listingObject">
         <img src="image/dress2.jpg" class="listing_img" alt="dress">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
-          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
         </div>
       </div>
      
@@ -185,15 +245,13 @@
        <img src="image/chanel.jpg" class="listing_img" alt="purse">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
-          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
         </div>
       </div>
     
     <br/>    <br/>
 
-    
-    <strong>You</strong> offered:
+  
     <br/>
 
       <a class="listing_link" href="ListingPage.html">
@@ -201,8 +259,7 @@
         <img src="image/pink.jpg" class="listing_img" alt="purse">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
-          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
         </div>
       </div>
      
@@ -212,8 +269,7 @@
         <img src="image/gucci.jpg" class="listing_img" alt="sneakers">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
-          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
         </div>
       </div>
       </a>
@@ -223,8 +279,7 @@
         <img src="image/tee.jpg" class="listing_img" alt="tee">
       </a>
         <div class="details">
-          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Decline</button></a>
-          <a href="AcceptListing.html"><button type="button" class="btn btn-outline-secondary" class="update">Accept</button></a>
+          <a href="DeclineListing.html"> <button type="button" class="btn btn-outline-danger" class="delete">Remove</button></a>
         </div>
       </div>
 
