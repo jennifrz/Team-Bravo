@@ -44,12 +44,16 @@
         font-size: 52px;
         font-weight: bold;
       }
-      h3 {
-        color: white;
-        padding: 10%;
+            
+      footer-copyright {
         font-family: Futura;
-        float: right;
+        background-color: #63C6F1;
       }
+      
+      .endofinfo {
+        border-bottom: 2px solid #63C6F1;
+      }
+      
     </style>
 
     <title>Home</title>
@@ -94,7 +98,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-5" style="padding-top: 12%;">
-          <h1>shop & swap</h3>
+          <h1>shop & swap</h1>
           <br/>
           <br/>
           <form action="SignUpPage.html" style="float: left;">
@@ -112,12 +116,32 @@
     </div>
 
     <div>
-      <img src="image/how_it_works.png"/>
+      <img class="endofinfo" src="image/how_it_works.png"/>
     </div>
 
-    <div style="width: 100%; height: 300px; background-color: #272932;">
-      <h3>created by team bravo</h3>
-    </div>
+    <!-- Footer -->
+      <footer class="page-footer font-small unique-color-dark pt-4">
+      
+          <!-- Footer Elements -->
+          <div class="footer">
+      
+            <!-- Call to action -->
+            <ul class="list-unstyled list-inline text-center py-2">
+              <!--<li class="list-inline-item">
+                <h5 class="mb-1" style="padding-top: 20%; padding-bottom: 0%;">Register for free</h5>
+              </li>-->
+              <li class="list-inline-item">
+                  <a href="SignUpPage.html"SignUpPage.html class="btn btn-lg btn-outline-primary">Sign up!</a>
+              </li>
+            </ul>
+            <!-- Call to action -->
+
+          </div>
+          
+            <div class="footer-copyright text-center py-3">© 2019 Copyright: teambravo</div>
+      
+        </footer>
+      <!-- Footer -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
