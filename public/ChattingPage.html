@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/chattingPage.css">
+    <title>Send Messages</title>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+      var username = sessionStorage.getItem("username");
+      var userSendTo = sessionStorage.getItem("currUser");
+
+      // document.getElementById("title").innerHTML = "<b>Messages with " + userSendTo + "</b>"
+
+      var profileURLRef = firebase.database().ref('Users/' + username + '/profileURL');
+      profileURLRef.on('value', function(snapshot) {
+          document.getElementById('profile_pic').src = snapshot.val();
+      });
+
+      var messagesRef = firebase.database().ref('Messages/' + username + '/' + userSendTo);
+      messagesRef.on('value', function(snapshot) {
+          document.getElementById("title").innerHTML = "Messages with " + userSendTo;
+          let messages = snapshot.val();
+          let text = "";
+          for(let key in messages){
+            let message = messages[key];
+            let content = message.content;
+            let time = message.time;
+            let status = message.status;
+            let sender = "";
+            if(status == "receive"){
+              sender = userSendTo;
+            }else{
+              sender = username;
+            }
+            text += "<tr><td class='name'>" + sender + "</td>";
+            text += "<td class='content'>" + content + "</td>";
+            text += "<td class='time'>" + time + "</td></tr>";
+          }
+          document.getElementById("message_table").innerHTML = text;
+      });
+
+      function sendMessage(){
+        let messageContent = document.getElementById("message_input").value;
+
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.getHours() + ":" + today.getMinutes();
+        let dateTime = date+' '+time;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               // Action to be performed when the document is read;
+               let responseMessage = this.responseText;
+               if(responseMessage == "message sent"){
+                 document.getElementById("message_input").value = "";
+               }
+            }
+        };
+        let url = "?username=" + username + "&userSendTo=" + userSendTo + "&messageContent=" + messageContent + "&time=" + dateTime;
+        xhttp.open("GET", "/sendMessage/" + url, true);
+        xhttp.send();
+      }
+    </script>
+
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand ml-3" href="Dashboard.html">
+        <img src="image/logo.png" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+
+        <form class="form-inline ml-3 mr-auto mt-2 mt-lg-0 search_bar">
+          <!-- <span class="fa fa-search search_icon"></span>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search"> -->
+        </form>
+
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="CreateListing.html" id="createListingBtn">CREATE LISTING</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="MessagePage.html">MESSAGES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="NotificationPage.html">NOTIFICATIONS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ProfilePage.html">
+              <img src="" class="profile_pic" id="profile_pic" width="30" height="30" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Your Code Here -->
+    <div id="title">Messages</div>
+    <div id="message_div">
+      <table id="message_table" class="table">
+        <!-- <tr>
+          <td class="name, align-middle">Tommy Trojan</td>
+          <td class="content">Your denim jacket is awesome. Let's swap!</td>
+          <td class="time, align-middle">3:50 PM</td>
+        </tr>
+        <tr>
+          <td class="name, align-middle">You</td>
+          <td class="content">Ok, sounds good!</td>
+          <td class="time, align-middle">Yesterday 9:00 AM</td>
+        </tr>
+        <tr>
+          <td class="name, align-middle">Tommy Trojan</td>
+          <td class="content">Wow. Yes. You can submit a swap request and I can take a look tonight!</td>
+          <td class="time, align-middle">Friday 1:32 PM</td>
+        </tr>
+        <tr>
+          <td class="name, align-middle">You</td>
+          <td class="content">You: Sure! I have a denim jacket. Are you interested?</td>
+          <td class="time, align-middle">Friday 10:17 AM</td>
+        </tr>
+        <tr>
+          <td class="name, align-middle">Tommy Trojan</td>
+          <td class="content">Thanks. Are you interested in swapping?</td>
+          <td class="time, align-middle">Wednesday 5:32 AM</td>
+        </tr>
+        <tr>
+          <td class="name, align-middle">You</td>
+          <td class="content">I like this item.</td>
+          <td class="time, align-middle">Wednesday 4:04 AM</td>
+        </tr> -->
+      </table>
+    </div>
+    <div id="message_input_div">
+      <textarea id="message_input"></textarea>
+      <br>
+      <button id="sendButton" onclick="sendMessage()">Send Message</button>
+    </div>
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

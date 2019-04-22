@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137157993-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-137157993-1');
+    </script>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+
+    <style>
+      .navbar {
+        padding: 20px;
+        font-weight: bold;
+      }
+      .btn {
+        background-color: #63C6F1;
+        border-color: #63C6F1;
+        border-radius: 12px;
+        width: 178px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .container {
+        text-align: center;
+        padding-top: 3%;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: Futura,Trebuchet MS,Arial,sans-serif;
+        letter-spacing: 0.5px;
+      }
+      .nav-item {
+        font-size: 18px;
+      }
+      .form-control {
+        padding: 25px;
+        margin: 25px;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+      }
+      h1 {
+        font-size: 36px;
+        font-family: neue-haas-grotesk-display, sans-serif;
+      }
+      h3 {
+        font-size: 18px;
+        color: #898F91;
+        padding: 2%;
+      }
+
+      .profileImage{
+        margin: 25px;
+      }
+
+      #profileURL{
+        object-fit: cover;
+      }
+
+    </style>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+
+      function addUser(){
+        // Get form input
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('psw').value;
+        var password_repeat = document.getElementById('psw-repeat').value;
+        var profileURL = document.getElementById('profileURL').src;
+
+        validateForm('username');
+        validateForm('psw');
+        validateForm('psw-repeat');
+        validateProfileImage();
+
+        if(username != "" && password != "" && password_repeat != "" && profileURL != ""){
+          if(password != password_repeat){
+            document.getElementById('psw-repeat').classList.add("is-invalid");
+            document.getElementById("psw-repeat_error").innerHTML = "Password and confirmation password does not match";
+          }else{
+            document.getElementById('psw-repeat').classList.remove("is-invalid");
+            document.getElementById("psw-repeat_error").innerHTML = "";
+
+            // Get user list in database
+            database.ref('/Users/').once('value').then(function(snapshot) {
+        			var userList = snapshot.val();
+
+              // Check if username exists
+              if(userList[username]){
+                document.getElementById('username').classList.add("is-invalid");
+                document.getElementById("username_error").innerHTML = "Username already exists";
+              }else{
+                let imageKey = generateImageKey();
+                let path = "images/" + imageKey + "profile.jpg";
+                var imageRef = storageRef.child(path);
+
+                var imageURL = imageRef.putString(profileURL, 'data_url').then(function(snapshot){
+                  return imageRef.getDownloadURL().then(function(url) {
+                    return url;
+                  })
+                });
+
+                Promise.all([imageURL]).then(values=>{
+                  profileURL = values[0];
+
+                  var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                       // Action to be performed when the document is read;
+                       let currUsername = this.responseText;
+                       sessionStorage.setItem("username", currUsername);
+                       window.location.href = "Dashboard.html";
+                    }
+                  };
+                  let data = {
+                    username: username,
+                    password: password,
+                    profileURL: profileURL,
+                  }
+                  xhttp.open("POST", "/signup/", true);
+                  xhttp.setRequestHeader("Content-Type", "application/json");
+                  xhttp.send(JSON.stringify(data));
+                });
+              }
+        		});
+
+          }
+        }
+      }
+
+      function generateImageKey(){
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < 20; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+        return text;
+      }
+
+      function validateForm(inputName){
+        var text = "";
+        if(inputName == 'username'){
+          text = "Username";
+        }else if(inputName == 'psw'){
+          text = "Password";
+        }else if(inputName == 'psw-repeat'){
+          text = "Confirm password";
+        }
+
+        var input = document.getElementById(inputName);
+        if(input.value == ""){
+          document.getElementById(inputName).classList.add("is-invalid");
+          document.getElementById(inputName+"_error").innerHTML = text + " cannot be empty";
+        }else{
+          document.getElementById(inputName).classList.remove("is-invalid");
+          document.getElementById(inputName+"_error").innerHTML = "";
+        }
+      }
+
+      function validateProfileImage(){
+        var input = document.getElementById("profileURL");
+        if(input.src == ""){
+          document.getElementById("choose_file_1").classList.add("is-invalid");
+          document.getElementById("profileURL_error").innerHTML = "A profile image has to be uploaded.";
+        }else{
+          document.getElementById("choose_file_1").classList.remove("is-invalid");
+          document.getElementById("profileURL_error").innerHTML = "";
+        }
+      }
+    </script>
+    <title>Sign Up</title>
+  </head>
+
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand ml-3">
+        <img src="image/logo.png" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+
+        <div class="ml-3 mr-auto mt-2 mt-lg-0"></div>
+
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active">SIGN UP</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="LoginPage.html">LOG IN</a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </nav>
+
+    <form>
+      <div class="container form-group">
+        <h1>SIGN UP</h1>
+        <hr>
+        <!-- <input type="text" class="form-control" placeholder="Email address" name="email"> -->
+        <div class="profileImage">
+          <img id="profileURL" width="200px" height="200px" onclick="open_file_dialog1();"/>
+          <input type="file" accept="image/*" class="form-control-file" id="choose_file_1" onchange="preview_image1(event);" style="display:none"></td>
+          <div class="invalid-feedback" id="profileURL_error"></div>
+        </div>
+
+        <input type="text" class="form-control" placeholder="Username" name="username" id="username" onfocusout="validateForm('username')" oninput="validateForm('username')">
+        <div class="invalid-feedback" id="username_error"></div>
+
+        <input type="password" class="form-control" placeholder="Password" name="psw" id="psw" onfocusout="validateForm('psw')" oninput="validateForm('psw')">
+        <div class="invalid-feedback" id="psw_error"></div>
+
+        <input type="password" class="form-control" placeholder="Confirm Password" name="psw-repeat" id="psw-repeat" onfocusout="validateForm('psw-repeat')" oninput="validateForm('psw-repeat')">
+        <div class="invalid-feedback" id="psw-repeat_error"></div>
+
+        <!-- <div class="invalid-feedback">Please upload four images.</div>
+
+        <input type="text" class="form-control" placeholder="Profile Image URL" name="profileURL" id="profileURL" onfocusout="validateForm('profileURL')" oninput="validateForm('profileURL')"> -->
+
+        <h3>By creating an account, I accept Shwap's Terms and Privacy Policy.</h3>
+      </div>
+    </form>
+    <button class="btn btn-primary btn-lg btn-block" onclick="addUser()">Sign Up</button>
+    <div class="container" style="padding-top: 1%; padding-bottom: 5%;">
+      <h3>Already have an account? <a href="LoginPage.html">Log In</a></h3>
+    </div>
+
+    <script type="text/javascript">
+      function preview_image1(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('profileURL');
+        output.src = reader.result;
+        validateProfileImage();
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function open_file_dialog1(){
+        document.getElementById("choose_file_1").click();
+      }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

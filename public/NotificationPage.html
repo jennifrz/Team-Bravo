@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <title>Notifications</title>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      var username = sessionStorage.getItem("username");
+
+      var profileURLRef = firebase.database().ref('Users/' + username + '/profileURL');
+      profileURLRef.on('value', function(snapshot) {
+        document.getElementById('profile_pic').src = snapshot.val();
+      });
+
+      var notificationRef = firebase.database().ref('Notifications/' + username);
+      notificationRef.on('value', function(snapshot) {
+        let notifications = snapshot.val();
+        var textNew = "<div id='newTitle'>NEW</div>";
+        var textPast = "<div id='pastTitle'>PAST</div>";
+        let notificationList = [];
+        let keyList = [];
+        for(let key in notifications){
+          let notification = notifications[key];
+          notificationList.push(notification);
+          keyList.push(key);
+        }
+        notificationList = notificationList.reverse();
+        keyList = keyList.reverse();
+        for(let i in notificationList){
+          let notification = notificationList[i];
+          let key = keyList[i];
+          if(notification.type == "offerReceived"){
+            let offerMaker = notification.offerMaker;
+            let listingTitle = notification.listingTitle;
+            let time = notification.time;
+            if(notification.status == "new"){
+              textNew += "<a href='ProfilePage.html'><div class='unreadNotification' onclick='clickNotification(\""+key+"\")'><strong>" + offerMaker + "</strong> made an offer for your " + listingTitle + "."
+              + "<div class='timeStamp'>" + time +"</div></div></a>";
+            }else{
+              textPast += "<div class='notification'><strong>" + offerMaker + "</strong> made an offer for your " + listingTitle + "."
+              + "<div class='timeStamp'>" + time +"</div></div>";
+            }
+          }
+          if(notification.type == "offerDeclined"){
+            let user = notification.user;
+            let listingTitle = notification.listingTitle;
+            let time = notification.time;
+            if(notification.status == "new"){
+              textNew += "<div class='unreadNotification' onclick='clickNotification(\""+key+"\")'><strong>" + user + "</strong> declined your offer to " + listingTitle + "."
+              + "<div class='timeStamp'>" + time +"</div></div>";
+            }else{
+              textPast += "<div class='notification'><strong>" + user + "</strong> declined your offer to " + listingTitle + "."
+              + "<div class='timeStamp'>" + time +"</div></div>";
+            }
+          }
+          if(notification.type == "offerAccepted"){
+            let user = notification.user;
+            let listingTitle = notification.listingTitle;
+            let time = notification.time;
+            if(notification.status == "new"){
+              textNew += "<a href='ProfilePage.html'><div class='unreadNotification' onclick='clickNotification(\""+key+"\")'><strong>" + user + "</strong> accepted your offer to " + listingTitle + "."
+              + "<div class='timeStamp'>" + time +"</div></div></a>";
+            }else{
+              textPast += "<div class='notification'><strong>" + user + "</strong> accepted your offer to " + listingTitle + "."
+              + "<div class='timeStamp'>" + time +"</div></div>";
+            }
+          }
+          if(notification.type == "offerDeleted"){
+            let listingTitle = notification.listingTitle;
+            let time = notification.time;
+            if(notification.status == "new"){
+              textNew += "<div class='unreadNotification' onclick='clickNotification(\""+key+"\")'><strong>" + listingTitle + "</strong> has been deleted."
+              + "<div class='timeStamp'>" + time +"</div></div>";
+            }else{
+              textPast += "<div class='notification'><strong>" + listingTitle + "</strong> has been deleted."
+              + "<div class='timeStamp'>" + time +"</div></div>";
+            }
+          }
+        }
+        document.getElementById("notificationsNew").innerHTML = textNew;
+        document.getElementById("notificationsPast").innerHTML = textPast;
+      });
+
+      function clickNotification(key){
+        var statusRef = database.ref('/Notifications/' + username + "/" + key + "/status");
+        statusRef.once('value').then(function(snapshot) {
+          statusRef.set("past");
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand ml-3" href="Dashboard.html">
+        <img src="image/logo.png" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+
+        <form class="form-inline ml-3 mr-auto mt-2 mt-lg-0 search_bar">
+          <!-- <span class="fa fa-search search_icon"></span>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search"> -->
+        </form>
+
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="CreateListing.html" id="createListingBtn">CREATE LISTING</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="MessagePage.html">MESSAGES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="NotificationPage.html">NOTIFICATIONS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ProfilePage.html">
+              <img src="" class="profile_pic" id="profile_pic" width="30" height="30" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Start Container -->
+    <div id="container">
+
+      <!-- Start Content -->
+      <div id="notificationContent">
+        <!-- Start New Notifications -->
+
+        <div id="notificationsTitle">
+          Notifications
+        </div>
+
+        <div class="type">
+          <div id="notificationsNew"></div>
+          <!-- <div class="notification" class="unread">
+                  <img src="image/profile_pic.jpeg" class="profile-pic">
+            <strong>Ariana Perez (@ariana.perez)</strong> has connected with you.
+            <div class="timeStamp">29m</div>
+          </div>
+
+          <div class="notification" class="unread">
+                  <img src="image/profile_pic.jpeg" class="profile-pic">
+            <strong>Marissa Burg (@marissaaburg)</strong> made an offer for your "Blue Knock-Off Vans".
+            <div class="timeStamp">45m</div>
+          </div>
+
+          <div class="notification" class="unread">
+                  <img src="image/profile_pic.jpeg" class="profile-pic">
+            <strong>Olivia Henry (@catsanddogs96)</strong> made an offer for your "Blue Knock-Off Vans".
+            <div class="timeStamp">55m</div>
+          </div> -->
+        </div>
+        <!-- End New Notifications -->
+
+        <!-- Start Past Notifications -->
+        <div class="type">
+          <div id="notificationsPast"></div>
+          <!-- <div class="notification" class="read">
+                  <img src="image/profile_pic.jpeg" class="profile-pic">
+            <strong>Jane Lopez (@theburbgal)</strong> accepted your offer for "Striped Maxi Skirt".
+            <div class="timeStamp">3h</div>
+          </div>
+
+          <div class="notification" class="read">
+                  <img src="image/profile_pic.jpeg" class="profile-pic">
+            <strong>Emma Miller (@emmmmmmmmma)</strong> has connected with you.
+            <div class="timeStamp">5h</div>
+          </div> -->
+        </div>
+        <!-- End Past Notifications -->
+
+      </div>
+      <!-- End Content -->
+
+    </div>
+    <!-- End Container -->
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
