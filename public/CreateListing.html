@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/createListing.css">
+    <title>Create Listing</title>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+
+      var username = sessionStorage.getItem("username");
+
+      var profileURLRef = firebase.database().ref('Users/' + username + '/profileURL');
+      profileURLRef.on('value', function(snapshot) {
+        document.getElementById('profile_pic').src = snapshot.val();
+      });
+
+      function createListing(){
+        validateInput("title");
+        validateInput("category");
+        validateInput("size");
+        validateInput("details");
+        validateInput("brand");
+        validateInput("color");
+        validateInput("originalPrice");
+        validateInput("currValue");
+        validateInput("images");
+        let title =  document.getElementById("title").value;
+        let category = document.getElementById("category").value;
+        let size = document.getElementById("size").value;
+        let details = document.getElementById("details").value;
+        let brand = document.getElementById("brand").value;
+        let color = document.getElementById("color").value;
+        let originalPrice = document.getElementById("originalPrice").value;
+        let currValue = document.getElementById("currValue").value;
+        let image1 = document.getElementById("image1").src;
+        let image2 = document.getElementById("image2").src;
+        let image3 = document.getElementById("image3").src;
+        let image4 = document.getElementById("image4").src;
+
+        if(title != "" && category != "Select Category" && size != "Select Size" && details != "" && brand  != ""
+          && color != "Select Color" && originalPrice != "" &&  currValue != "" && image1 != "" && image2 != ""
+          && image3 != "" && image4 != ""){
+            let imageKey = generateImageKey();
+            let path1 = "images/" + imageKey + "1.jpg";
+            let path2 = "images/" + imageKey + "2.jpg";
+            let path3 = "images/" + imageKey + "3.jpg";
+            let path4 = "images/" + imageKey + "4.jpg";
+            var image1Ref = storageRef.child(path1);
+            var image2Ref = storageRef.child(path2);
+            var image3Ref = storageRef.child(path3);
+            var image4Ref = storageRef.child(path4);
+
+
+            var image1URL = image1Ref.putString(image1, 'data_url').then(function(snapshot){
+              return image1Ref.getDownloadURL().then(function(url1) {
+                return url1;
+              })
+            });
+
+            var image2URL = image2Ref.putString(image2, 'data_url').then(function(snapshot){
+              return image2Ref.getDownloadURL().then(function(url2) {
+                return url2;
+              })
+            });
+
+            var image3URL = image3Ref.putString(image3, 'data_url').then(function(snapshot){
+              return image3Ref.getDownloadURL().then(function(url3) {
+                return url3;
+              })
+            });
+
+            var image4URL = image4Ref.putString(image4, 'data_url').then(function(snapshot){
+              return image4Ref.getDownloadURL().then(function(url4) {
+                return url4;
+              })
+            });
+
+            Promise.all([image1URL, image2URL, image3URL, image4URL]).then(values=>{
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                    let listingId = this.responseText;
+                    sessionStorage.setItem("listingId", listingId);
+                    window.location.href = "ListingPage.html";
+                  }
+              };
+              let data = {
+                username: username,
+                title: title,
+                category: category,
+                size: size,
+                details : details,
+                brand: brand,
+                color: color,
+                originalPrice: originalPrice,
+                currValue: currValue,
+                image1: values[0],
+                image2: values[1],
+                image3: values[2],
+                image4: values[3]
+              }
+              xhttp.open("POST", "/createListing/", true);
+              xhttp.setRequestHeader("Content-Type", "application/json");
+              xhttp.send(JSON.stringify(data));
+            });
+        }
+
+      }
+
+      function generateImageKey(){
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < 20; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+        return text;
+      }
+
+      function validateInput(inputName){
+        if(inputName == "images"){
+          let imageURL1 = document.getElementById("image1").src;
+          let imageURL2 = document.getElementById("image2").src;
+          let imageURL3 = document.getElementById("image3").src;
+          let imageURL4 = document.getElementById("image4").src;
+
+          if(imageURL1 == "" || imageURL2 == "" || imageURL3 == "" || imageURL4 == ""){
+            document.getElementById("choose_file_4").classList.add("is-invalid");
+          }else{
+            document.getElementById("choose_file_4").classList.remove("is-invalid");
+          }
+        }else{
+          let undesiredVal = "";
+          if(inputName == "category"){
+            undesiredVal = "Select Category";
+          }else if(inputName == "size"){
+            undesiredVal = "Select Size";
+          }else if(inputName == "color"){
+            undesiredVal = "Select Color"
+          }
+          if(document.getElementById(inputName).value == undesiredVal){
+            document.getElementById(inputName).classList.add("is-invalid");
+          }else{
+            document.getElementById(inputName).classList.remove("is-invalid");
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand ml-3" href="Dashboard.html">
+        <img src="image/logo.png" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+
+        <form class="form-inline ml-3 mr-auto mt-2 mt-lg-0 search_bar">
+          <!-- <span class="fa fa-search search_icon"></span>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search"> -->
+        </form>
+
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="CreateListing.html" id="createListingBtn">CREATE LISTING</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="MessagePage.html">MESSAGES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="NotificationPage.html">NOTIFICATIONS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ProfilePage.html">
+              <img src="" id="profile_pic" class="profile_pic" width="30" height="30" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Your Code Here -->
+    <div id="form_div">
+      <div id="form_title">CREATE LISTING</div>
+      <form>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="txt" id="title" class="form-control" placeholder="What are you selling?" onfocusout="validateInput('title')" oninput="validateInput('title')">
+          <div class="invalid-feedback">Title cannot be empty.</div>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control" id="category" onchange="validateInput('category')">
+            <option disabled selected>Select Category</option>
+            <option>Tops</option>
+            <option>Jacket & Coat</option>
+            <option>Pants</option>
+            <option>Jeans</option>
+            <option>Shorts</option>
+            <option>Skirts</option>
+            <option>Dresses</option>
+            <option>Accessories</option>
+            <option>Others</option>
+          </select>
+          <div class="invalid-feedback">A category needs to be selected.</div>
+        </div>
+        <div class="form-group">
+          <label>Size</label>
+          <select class="form-control" id="size" onchange="validateInput('size')">
+            <option disabled selected>Select Size</option>
+            <option>XXS</option>
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>One Size</option>
+          </select>
+          <div class="invalid-feedback">A size needs to be selected.</div>
+        </div>
+        <div class="form-group">
+          <label>Details</label>
+          <textarea id="details" class="form-control" rows="3" placeholder="Describe it!" onfocusout="validateInput('details')" oninput="validateInput('details')"></textarea>
+          <div class="invalid-feedback">Details cannot be empty.</div>
+        </div>
+        <div class="form-group">
+          <label>Brand</label>
+          <input type="txt" id="brand"  class="form-control" placeholder="Enter the Brand/Designer" onfocusout="validateInput('brand')" oninput="validateInput('brand')">
+          <div class="invalid-feedback">Brand cannot be empty.</div>
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <select class="form-control" id="color" onchange="validateInput('color')">
+            <option disabled selected>Select Color</option>
+            <option>Red</option>
+            <option>Orange</option>
+            <option>Yellow</option>
+            <option>Green</option>
+            <option>Blue</option>
+            <option>Purple</option>
+            <option>Pink</option>
+            <option>Black</option>
+            <option>Gray</option>
+            <option>White</option>
+          </select>
+          <div class="invalid-feedback">A color needs to be selected.</div>
+        </div>
+        <div class="form-group">
+          <label>Original Price</label>
+          <input type="txt" id="originalPrice" class="form-control" placeholder="Ex. $80" onfocusout="validateInput('originalPrice')" oninput="validateInput('originalPrice')">
+          <div class="invalid-feedback">Original price cannot be empty.</div>
+        </div>
+        <div class="form-group">
+          <label>Current Value Estimated</label>
+          <input type="txt" id="currValue" class="form-control" placeholder="Ex. $30" onfocusout="validateInput('currValue')" oninput="validateInput('currValue')">
+          <div class="invalid-feedback">Current value estimated cannot be empty.</div>
+        </div>
+        <div class="form-group">
+          <label>Upload Photos</label>
+          <table id="image_table">
+            <td><img id="image1" width="200px" height="200px" onclick="open_file_dialog1();"/></td>
+            <td><img id="image2" width="200px" height="200px" onclick="open_file_dialog2();"/></td>
+            <td><img id="image3" width="200px" height="200px" onclick="open_file_dialog3();"/></td>
+            <td><img id="image4" width="200px" height="200px" onclick="open_file_dialog4();"/></td>
+          </table>
+          <input type="file" accept="image/*" class="form-control-file" id="choose_file_1" onchange="preview_image1(event);" style="display:none"></td>
+          <input type="file" accept="image/*" class="form-control-file" id="choose_file_2" onchange="preview_image2(event);" style="display:none"></td>
+          <input type="file" accept="image/*" class="form-control-file" id="choose_file_3" onchange="preview_image3(event);" style="display:none"></td>
+          <input type="file" accept="image/*" class="form-control-file" id="choose_file_4" onchange="preview_image4(event);" style="display:none"></td>
+          <div class="invalid-feedback">Please upload four images.</div>
+        </div>
+      </form>
+    </div>
+    <div id="button_div">
+      <button class="buttons" id="submit_button" onclick="createListing();">Submit</button>
+      <a href="Dashboard.html"><button class="buttons">Cancel</button></a>
+    </div>
+
+    <input type="file" id="imgupload" style="display:none"/>
+
+    <script type="text/javascript">
+      function preview_image1(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image1');
+        output.src = reader.result;
+        validateInput("images");
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function preview_image2(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image2');
+        output.src = reader.result;
+        validateInput("images");
+       }
+       reader.readAsDataURL(event.target.files[0]);
+
+      }
+
+      function preview_image3(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image3');
+        output.src = reader.result;
+        validateInput("images");
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function preview_image4(event)
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('image4');
+        output.src = reader.result;
+        validateInput("images");
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function open_file_dialog1(){
+        document.getElementById("choose_file_1").click();
+      }
+
+      function open_file_dialog2(){
+        document.getElementById("choose_file_2").click();
+      }
+
+      function open_file_dialog3(){
+        document.getElementById("choose_file_3").click();
+      }
+
+      function open_file_dialog4(){
+        document.getElementById("choose_file_4").click();
+      }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

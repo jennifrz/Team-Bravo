@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+
+    <title>Profile Page</title>
+
+    <style>
+    body {
+      color: black
+      font-size:14px;
+    }
+    div#section1 {
+      width: 70%;
+      margin-left: 15%;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #tabSection{
+      width: 70%;
+      margin-left: 15%;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #user_profile_pic_holder {
+      display: inline-block;
+      height: 150px;
+      width: 150px;
+      margin-left: auto;
+      text-align: center;
+      vertical-align: middle;
+      border-radius:50%;
+      background-position:center;
+      background-size: 300px auto;
+    }
+    #user_profile_pic{
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    #user_info_holder {
+      display: inline-block;
+      height: auto;
+      width: 150px;
+      margin-left: 40px;
+      margin-right: auto;
+      vertical-align: middle;
+      text-align: left;
+    }
+      #user {
+        font-weight: bold;
+      }
+      #user_name {
+        color: #5f6c72;
+        margin-top:-15px;
+      }
+    #user_profile_pic {
+      border-radius: 50%;
+      height: 150px;
+      width: 150px;
+    }
+    /* Product Section */
+    #section2 {
+      width: 80%;
+      margin-left: 10%;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #section3 {
+      width: 80%;
+      margin-left: 10%;
+      text-align: center;
+      margin-top: 50px;
+      display: none;
+    }
+
+    #section4 {
+      width: 80%;
+      margin-left: 10%;
+      text-align: center;
+      margin-top: 50px;
+      display: none;
+    }
+
+    .listingObject {
+      float: left;
+      width: 28%;
+      margin: 2%;
+    }
+
+    .listingObject img {
+      width: 100%;
+      height: 43vh;
+      object-fit: cover;
+      cursor: pointer;
+   }
+    .details {
+      margin-top: 15px;
+   }
+    .details p {
+      margin-bottom: 2px;
+      text-align: left;
+   }
+    a.listing_link {
+      color: black;
+    }
+    div.details > p {
+      color: black;
+      font-size:14px;
+   }
+
+    .listingImg{
+      object-fit: cover;
+    }
+    .offer-button {
+      float:left;
+      cursor: pointer;
+      color: gray;
+      text-decoration:underline;
+      font-size:14px;
+    }
+    .offer-button:hover {
+      color: #63C6F1;
+    }
+    .profile-tabs {
+      background-color:white;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      font-size: 17px;
+      color:gray;
+    }
+
+    .selectedTab{
+      color:black;
+      font-weight:bold;
+      border-bottom:0.5px solid black;
+    }
+
+    #edit_listings_button{
+      background-color: #63C6F1;;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      outline: 0;
+      width: 150px;
+    }
+
+    #log_out_button{
+      border-radius: 5px;
+      outline: 0;
+      width: 150px;
+      color: gray;
+      border: 1px solid gray;
+    }
+
+    .view_offer{
+      color: gray;
+      cursor: pointer;
+    }
+
+    #listingTab{
+      outline: 0;
+    }
+
+    #offerTab{
+      outline: 0;
+    }
+
+    #swappedTab{
+      outline: 0;
+    }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEalUxcaiYXQ8TnMTSyStFupIcpcAy5t8",
+        authDomain: "shawp-124fc.firebaseapp.com",
+        databaseURL: "https://shawp-124fc.firebaseio.com",
+        projectId: "shawp-124fc",
+        storageBucket: "shawp-124fc.appspot.com",
+        messagingSenderId: "798376441403"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      var username = sessionStorage.getItem("username");
+      var userProfileURL = "";
+      var profileURLRef = firebase.database().ref('Users/' + username + '/profileURL');
+      profileURLRef.on('value', function(snapshot) {
+        userProfileURL = snapshot.val();
+        document.getElementById('profile_pic').src = userProfileURL
+
+      });
+
+      var text = "<div id='user_profile_pic_holder'><img id='user_profile_pic' src=''></div><div id='user_info_holder'><p id='user'>" + username
+      + "</p>";;
+
+      var listingRef = database.ref('UserListings/' + username);
+      listingRef.on('value', function(snapshot) {
+        let listings = snapshot.val();
+        let listingSize = "";
+        if(listings){
+          if(Object.keys(listings).length > 1){
+            listingSize = Object.keys(listings).length + " Listings";
+          }else {
+            listingSize = Object.keys(listings).length + " Listing";
+          }
+        }else{
+          listingSize = "0 Listing";
+        }
+
+        text += "<p id='user_listings'>" + listingSize + "</p></div><div class='clearfloat'></div>";
+        document.getElementById("section1").innerHTML = text;
+        document.getElementById('user_profile_pic').src = userProfileURL;
+
+        for(let key in listings){
+          let id = listings[key];
+          let data = database.ref('Listings/' + id).on('value', function(snapshot) {
+            updateMyListings(listings);
+          });
+        }
+
+      });
+
+      function updateMyListings(listings){
+        var promises = [];
+        for(let key in listings){
+          let id = listings[key];
+          promises.push(database.ref('Listings/' + id).once('value').then(function(snapshot) {
+            var listingInfo = snapshot.val();
+            if(listingInfo){
+              var image1 =  listingInfo.photos.image1;
+              var title = listingInfo.title;
+              var offerCount = listingInfo.offerCount;
+              if(offerCount == "0" || offerCount == "1"){
+                offerCount += " Offer";
+              }else{
+                offerCount += " Offers";
+              }
+
+              return {
+                image1: image1,
+                title: title,
+                id: id,
+                offerCount: offerCount
+              }
+            }else{
+              return;
+            }
+          }));
+        }
+
+        Promise.all(promises).then(function(values){
+          var text2 = "";
+          for(let idx in values){
+            let data = values[idx];
+            if(data){
+              text2 += "<div class='listingObject'><img onclick='viewListing(\""+data.id+"\");'  src='" + data.image1 + "' class='listing_img' alt=''><div class='details'><p>"
+                + data.title + "</p><p><u onclick='viewOffer(\""+data.id+"\");' class='view_offer'>View " + data.offerCount + "</u></p></div></div>";
+            }
+          }
+          document.getElementById("section2").innerHTML = text2;
+        });
+      }
+
+      var offerRef = database.ref('UserOffers/' + username);
+      offerRef.on('value', function(snapshot) {
+        let offers = snapshot.val();
+
+        for(let key in offers){
+          let offerInfo = offers[key];
+          let listingId = offerInfo.listingId;
+          database.ref('Listings/' + listingId).on('value', function(snapshot){
+            updateMyOffers();
+          });
+        }
+      });
+
+      function updateMyOffers(){
+        database.ref('UserOffers/' + username).once('value').then(function(snapshot){
+          var offers = snapshot.val();
+          var promises = [];
+          for(let key in offers){
+            let offerInfo = offers[key];
+            let listingId = offerInfo.listingId;
+            let listingOfferId = offerInfo.listingOfferId;
+            promises.push(database.ref('Listings/' + listingId).once('value').then(function(snapshot){
+              let listingInfo = snapshot.val();
+              if(listingInfo){
+                var image1 =  listingInfo.photos.image1;
+                var title = listingInfo.title;
+                return {
+                  listingId: listingId,
+                  image1: image1,
+                  title: title,
+                  listingOfferId: listingOfferId
+                }
+              }else{
+                return;
+              }
+            }));
+          }
+
+          Promise.all(promises).then(function(values){
+            var text3 = "";
+            for(let idx in values){
+              let data = values[idx];
+              if(data){
+                text3 += "<div class='listingObject'><img onclick='viewListing(\""+data.listingId+"\");'  src='" + data.image1 + "' class='listing_img' alt=''><div class='details'><p>"
+                  + data.title + "</p><p><u onclick='viewYourOffer(\""+data.listingOfferId+"\");' class='view_offer'>View Your Offer</u></p></div></div>";
+              }
+            }
+            document.getElementById("section3").innerHTML = text3;
+          });
+        });
+      }
+
+      var swappedListingsRef = database.ref('SwappedListings/' + username);
+      swappedListingsRef.on('value', function(snapshot) {
+        let listings = snapshot.val();
+        var text4 = "";
+        for(let key in listings){
+          let listing = listings[key];
+          let title = listing.title;
+          let image1 = listing.image;
+          text4 += "<div style='opacity: 0.5;' class='listingObject'><img style='cursor:default;' src='" + image1 + "' class='listing_img' alt=''><div class='details'><p>"
+                + title + "</p></div></div>";
+        }
+        document.getElementById("section4").innerHTML = text4;
+      });
+
+      function viewListing(listingId){
+        sessionStorage.setItem("listingId", listingId);
+        window.location.href = "ListingPage.html";
+      }
+
+      function viewOffer(listingId){
+        sessionStorage.setItem("listingId", listingId);
+        window.location.href = "ViewOffers.html";
+      }
+
+      function viewYourOffer(listingId){
+        sessionStorage.setItem("listingId", listingId);
+        window.location.href = "ListingPage.html";
+      }
+
+      function myListings(){
+        document.getElementById("section2").style.display = "block";
+        document.getElementById("section3").style.display = "none";
+        document.getElementById("section4").style.display = "none";
+        document.getElementById("listingTab").classList.add("selectedTab");
+        document.getElementById("offerTab").classList.remove("selectedTab");
+        document.getElementById("swappedTab").classList.remove("selectedTab");
+      }
+
+      function offerMade(){
+        document.getElementById("section2").style.display = "none";
+        document.getElementById("section3").style.display = "block";
+        document.getElementById("section4").style.display = "none";
+        document.getElementById("listingTab").classList.remove("selectedTab");
+        document.getElementById("offerTab").classList.add("selectedTab");
+        document.getElementById("swappedTab").classList.remove("selectedTab");
+      }
+
+      function swappedListings(){
+        document.getElementById("section2").style.display = "none";
+        document.getElementById("section3").style.display = "none";
+        document.getElementById("section4").style.display = "block";
+        document.getElementById("listingTab").classList.remove("selectedTab");
+        document.getElementById("offerTab").classList.remove("selectedTab");
+        document.getElementById("swappedTab").classList.add("selectedTab");
+      }
+
+      function logout(){
+        sessionStorage.removeItem("username");
+        window.location.href = "index.html";
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand ml-3" href="Dashboard.html">
+        <img src="image/logo.png" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+
+        <form class="form-inline ml-3 mr-auto mt-2 mt-lg-0 search_bar">
+          <!-- <span class="fa fa-search search_icon"></span>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search"> -->
+        </form>
+
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="CreateListing.html" id="createListingBtn">CREATE LISTING</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="MessagePage.html">MESSAGES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="NotificationPage.html">NOTIFICATIONS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ProfilePage.html">
+              <img src="" class="profile_pic" id="profile_pic" width="30" height="30" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Your Code Here -->
+
+    <!-- Section 1 -->
+    <div id="section1">
+
+      <!-- Profile Picture -->
+      <!-- <div id="user_profile_pic_holder">
+      </div>
+
+      <div id="user_info_holder">
+        <p id="user"></p>
+        <p id="user_listings">9 listings</p>
+      </div>
+
+      <div class="clearfloat"></div> -->
+    </div>
+    <div id="tabSection">
+      <!-- Button -->
+    <div><button type="button" onclick="logout();" id="log_out_button" class="btn">Log Out</button></div>
+    <div style="margin-top:10px;"><a href="EditListings.html"><button type="button" id="edit_listings_button" class="btn btn-outline-secondary">Edit Listings</button></a></div>
+
+    <br><br>
+
+    <!-- profile tabs -->
+          <button type="button" class="profile-tabs selectedTab" id="listingTab" onclick="myListings();">My Listings</button>
+          <button type="button" class="profile-tabs" id="offerTab" onclick="offerMade();">Offers Made</button>
+          <button type="button" class="profile-tabs" id="swappedTab" onclick="swappedListings();">Swapped Listings</button>
+    </div>
+    <!-- End of section 1 -->
+
+    <!-- profile options-->
+
+    <div class="details">
+
+    </div>
+
+    <!-- Section 2 -->
+    <div id="section2">
+    </div>
+    <div id="section3">
+    </div>
+    <div id="section4">
+    </div>
+
+    <!-- my listings -->
+
+      <!-- <a class="listing_link" href="ListingPage.html">
+      <div class="listingObject">
+        <img src="image/4.jpg" class="listing_img" alt="jeans">
+        <div class="details">
+          <p>Jeans</p>
+          <p>Size: Small</p>
+              <a href="ListingOffers.html" class="offer-button">View 5 Offers</a>
+        </div>
+      </div>
+      </a>
+
+      <a class="listing_link" href="ListingPage.html">
+      <div class="listingObject">
+        <img src="image/dress2.jpg" class="listing_img" alt="dress">
+        <div class="details">
+          <p>Dress</p>
+          <p>Size: Small</p>
+              <a href="ListingOffers.html" class="offer-button">View 8 Offers</a>
+        </div>
+      </div>
+      </a>
+
+     <a class="listing_link" href="ListingPage.html">
+      <div class="listingObject">
+       <img src="image/chanel.jpg" class="listing_img" alt="purse">
+        <div class="details">
+          <p>Chanel Purse</p>
+          <p>Size: OS</p>
+              <a href="ListingOffers.html" class="offer-button">View 15 Offers</a>
+        </div>
+      </div>
+      </a> -->
+
+      <!-- offers made -->
+
+      <!-- <a class="listing_link" href="ListingPage.html">
+      <div class="listingObject">
+        <img src="image/pink.jpg" class="listing_img" alt="purse">
+        <div class="details">
+          <p>LV Purse</p>
+          <p>Size: OS</p>
+              <a href="ListingPage.html" class="offer-button">View Your Offer</a>
+        </div>
+      </div>
+      </a>
+
+      <a class="listing_link" href="ListingPage.html">
+      <div class="listingObject">
+        <img src="image/gucci.jpg" class="listing_img" alt="sneakers">
+        <div class="details">
+          <p>Gucci Sneakers</p>
+          <p>Size: 7</p>
+              <a href="ListingPage.html" class="offer-button">View Your Offer</a>
+        </div>
+      </div>
+      </a>
+
+      <a class="listing_link" href="ListingPage.html">
+      <div class="listingObject">
+        <img src="image/tee.jpg" class="listing_img" alt="tee">
+        <div class="details">
+          <p>Marble Tee</p>
+          <p>Size: Small</p>
+              <a href="ListingPage.html" class="offer-button">View Your Offer</a>
+        </div>
+      </div>
+      </a> -->
+    <!-- End of Section 2 -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+    <!-- jQuery UI -->
+   <!--  <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script> -->
+  </body>
+</html>
