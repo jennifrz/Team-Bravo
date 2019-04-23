@@ -234,6 +234,7 @@
         <hr>
         <!-- <input type="text" class="form-control" placeholder="Email address" name="email"> -->
         <div class="profileImage">
+          Click Box to Upload Profile Picture<br/>
           <img id="profileURL" width="200px" height="200px" onclick="open_file_dialog1();"/>
           <input type="file" accept="image/*" class="form-control-file" id="choose_file_1" onchange="preview_image1(event);" style="display:none"></td>
           <div class="invalid-feedback" id="profileURL_error"></div>
@@ -259,6 +260,14 @@
     <div class="container" style="padding-top: 1%; padding-bottom: 5%;">
       <h3>Already have an account? <a href="LoginPage.html">Log In</a></h3>
     </div>
+    
+    <div class="clear" style="clear: both;"></div>
+
+<!-- Footer -->
+      <footer class="page-footer font-small unique-color-dark pt-4">
+        <div class="footer-copyright text-center py-3" style="background-color: #63C6F1;">© 2019 Copyright: teambravo</div>
+      </footer>
+<!-- Footer -->
 
     <script type="text/javascript">
       function preview_image1(event)

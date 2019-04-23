@@ -40,7 +40,7 @@
 
       var messagesRef = firebase.database().ref('Messages/' + username + '/' + userSendTo);
       messagesRef.on('value', function(snapshot) {
-          document.getElementById("title").innerHTML = "Messages with " + userSendTo;
+          document.getElementById("title").innerHTML = "Conversation with " + userSendTo;
           let messages = snapshot.val();
           let text = "";
           for(let key in messages){
@@ -164,7 +164,15 @@
       <button id="sendButton" onclick="sendMessage()">Send Message</button>
     </div>
 
+<br/>
 
+<div class="clear" style="clear: both;"></div>
+
+<!-- Footer -->
+      <footer class="page-footer font-small unique-color-dark pt-4">
+        <div class="footer-copyright text-center py-3" style="background-color: #63C6F1;">© 2019 Copyright: teambravo</div>
+      </footer>
+<!-- Footer -->
 
 
 
