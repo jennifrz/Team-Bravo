@@ -149,9 +149,9 @@
     }
 
     #edit_listings_button{
-      background-color: #63C6F1;;
-      color: white;
-      border: none;
+      /*background-color: #63C6F1;;*/
+      /*color: white;*/
+      /*border: none;*/
       border-radius: 5px;
       outline: 0;
       width: 150px;
@@ -161,8 +161,8 @@
       border-radius: 5px;
       outline: 0;
       width: 150px;
-      color: gray;
-      border: 1px solid gray;
+      /*color: gray;*/
+      /*border: 1px solid gray;*/
     }
 
     .view_offer{
@@ -214,13 +214,13 @@
         let listings = snapshot.val();
         let listingSize = "";
         if(listings){
-          if(Object.keys(listings).length > 1){
-            listingSize = Object.keys(listings).length + " Listings";
-          }else {
+          if(Object.keys(listings).length = 1){
             listingSize = Object.keys(listings).length + " Listing";
+          }else {
+            listingSize = Object.keys(listings).length + " Listings";
           }
         }else{
-          listingSize = "0 Listing";
+          listingSize = "0 Listings";
         }
 
         text += "<p id='user_listings'>" + listingSize + "</p></div><div class='clearfloat'></div>";
@@ -445,8 +445,8 @@
     </div>
     <div id="tabSection">
       <!-- Button -->
-    <div><button type="button" onclick="logout();" id="log_out_button" class="btn">Log Out</button></div>
-    <div style="margin-top:10px;"><a href="EditListings.html"><button type="button" id="edit_listings_button" class="btn btn-outline-secondary">Edit Listings</button></a></div>
+    <div><button type="button" onclick="logout();" id="log_out_button" class="btn btn-outline-secondary">Log Out</button></div>
+    <div style="margin-top:10px;"><a href="EditListings.html"><button type="button" id="edit_listings_button" class="btn btn-primary">Edit Listings</button></a></div>
 
     <br><br>
 

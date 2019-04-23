@@ -40,13 +40,13 @@
 }
 
 #sendButton{
-  background-color: #63C6F1;;
-  color: white;
-  border: none;
+  /*background-color: transparent;*/
+  /*color: gray;*/
+  border: 1px gray solid;
   width: 20%;
   height: 40px;
   border-radius: 5px;
-  outline: none;
+  /*outline: none; */
 }
 
 .time{

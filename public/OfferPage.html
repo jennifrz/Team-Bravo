@@ -42,32 +42,28 @@
     }
 
     .swapbutton {
-    color: white;
-    background-color: #63C6F1;
-    text-align: center;
-    margin: auto;
-    font-size: 15px;
-    padding: 0;
-    width: 400px;
-    height: 50px;
-    border-radius: 13px;
-    display: block;
-    }
-    .messagebutton {
-      color: black;
-      background-color: white;
-      border-color: #63C6F1;
-      text-align: center;
-      margin: auto;
-      font-size: 12px;
-      padding: 0;
-      width: 95px;
-      height: 30px;
-      border-radius: 6px;
-      border-width: 2px;
-      float: right;
-      margin-right: 130px;
-    }
+margin: auto;
+font-size: 15px;
+padding: 0;
+width: 200px;
+height: 50px;
+border-radius: 13px;
+display: block;
+}
+.messagebutton {
+  background-color: white;
+  /*border-color: #63C6F1;*/
+  /*text-align: center;*/
+  margin: auto;
+  font-size: 12px;
+  padding: 0;
+  width: 95px;
+  height: 30px;
+  border-radius: 6px;
+  border-width: 2px;
+  float: right;
+  margin-right: 130px;
+}
     p {
       font-size: 15px;
       margin-top: 50px;
@@ -241,7 +237,7 @@
     <div>
       <a href="SellerProfilePage.html"><img src="" class="profile_pic" id="creator_pic" width="30" height="30" alt="">
       <span id="creatorName"></span></a>
-      <a href='ChattingPage.html' class='link2'><button type="button" class='messagebutton'>Message</button></a>
+      <a href='ChattingPage.html' class='link2'><button type="button" class='messagebutton btn-outline-secondary'>Message</button></a>
     </div>
   </div>
 
@@ -258,7 +254,7 @@
   </select>
   <br><br>
 
-  <button type="button" class='swapbutton' onclick="swap();">SWAP</button>
+  <button type="button" class='swapbutton btn btn-large btn-primary' onclick="swap();">SWAP</button>
 
   <!-- <img src="image/upload.png" alt="upload" class='mainimage'> -->
 </div>

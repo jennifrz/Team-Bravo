@@ -149,13 +149,13 @@
 
         let listingSize = "";
         if(listings){
-          if(Object.keys(listings).length > 1){
-            listingSize = Object.keys(listings).length + " Listings";
-          }else {
+          if(Object.keys(listings).length = 1){
             listingSize = Object.keys(listings).length + " Listing";
+          }else {
+            listingSize = Object.keys(listings).length + " Listings";
           }
         }else{
-          listingSize = "0 Listing";
+          listingSize = "0 Listings";
         }
         text += "<p id='user_listings'>" + listingSize + "</p></div><div class='clearfloat'></div>";
         document.getElementById("section1").innerHTML = text;
