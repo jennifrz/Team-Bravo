@@ -216,7 +216,7 @@
 
       });
 
-      
+
 
       var listingRef = database.ref('UserListings/' + username);
       listingRef.on('value', function(snapshot) {
@@ -235,7 +235,7 @@
       + "</p><p id='user_listings'>" + listingSize + "</p></div><div class='clearfloat'></div>";
         document.getElementById("section1").innerHTML = text;
         document.getElementById('user_profile_pic').src = userProfileURL;
-        
+
 
         var text2 = "";
         for(let key in listings){
