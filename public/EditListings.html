@@ -216,8 +216,7 @@
 
       });
 
-      var text = "<div id='user_profile_pic_holder'><img id='user_profile_pic' src=''></div><div id='user_info_holder'><p id='user'>" + username
-      + "</p>";;
+      
 
       var listingRef = database.ref('UserListings/' + username);
       listingRef.on('value', function(snapshot) {
@@ -232,9 +231,11 @@
         }else{
           listingSize = "0 Listing";
         }
-        text += "<p id='user_listings'>" + listingSize + "</p></div><div class='clearfloat'></div>";
+        var text = "<div id='user_profile_pic_holder'><img id='user_profile_pic' src=''></div><div id='user_info_holder'><p id='user'>" + username
+      + "</p><p id='user_listings'>" + listingSize + "</p></div><div class='clearfloat'></div>";
         document.getElementById("section1").innerHTML = text;
         document.getElementById('user_profile_pic').src = userProfileURL;
+        
 
         var text2 = "";
         for(let key in listings){
